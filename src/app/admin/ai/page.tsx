@@ -9,7 +9,7 @@ export default function AIContentGeneratorPage() {
   const [topic, setTopic] = useState("The Solar System");
   const [language, setLanguage] = useState("English");
   const [ageGroup, setAgeGroup] = useState("9-12 Years");
-  
+
   const [activeTab, setActiveTab] = useState<"lesson" | "quiz" | "story">("lesson");
   const [toast, setToast] = useState<string | null>(null);
 
@@ -104,7 +104,7 @@ export default function AIContentGeneratorPage() {
     <div className="space-y-8">
       <h4 className="font-headline-md text-headline-md text-main">Active Quiz: {appliedTopic} Checkpoint</h4>
       <p className="text-on-surface-variant text-body-md">5 questions designed to test knowledge of {appliedTopic} for {appliedAgeGroup} ({appliedLanguage}).</p>
-      
+
       <div className="space-y-6">
         <div className="p-6 bg-surface-container-low dark:bg-zinc-800/20 border border-outline-variant/30 rounded-2xl">
           <p className="font-bold text-main mb-3">Q1: Which of the following best describes the core anchor of {appliedTopic}?</p>
@@ -125,7 +125,7 @@ export default function AIContentGeneratorPage() {
           <div className="p-3 bg-white dark:bg-zinc-900 border border-outline-variant/30 rounded-xl flex items-center gap-3 w-fit">
             <span className="material-symbols-outlined text-primary dark:text-blue-400">translate</span>
             <span className="text-xs font-semibold text-text-main font-data-mono">
-              {appliedLanguage === "Spanish" ? "la atmósfera" : appliedLanguage === "French" ? "l'atmosphère" : appliedLanguage === "German" ? "die Atmosphäre" : "the atmosphere"}
+              {appliedLanguage === "عربية" ? "la atmósfera" : appliedLanguage === "French" ? "l'atmosphère" : appliedLanguage === "German" ? "die Atmosphäre" : "the atmosphere"}
             </span>
           </div>
         </div>
@@ -141,7 +141,7 @@ export default function AIContentGeneratorPage() {
           Leo the Lion strapped into his shiny golden rocket. "Today," he roared excitedly, "we are flying straight into <span className="font-bold text-primary dark:text-blue-400">{appliedTopic}</span>!"
         </p>
         <p>
-          With a deafening WHOOSH, the ship rocketed past the clouds. As they traveled, Leo practiced his {appliedLanguage} direction terms: <strong>{appliedLanguage === "Spanish" ? "¡Izquierda!" : appliedLanguage === "French" ? "Gauche!" : "Left!"}</strong> and <strong>{appliedLanguage === "Spanish" ? "¡Derecha!" : appliedLanguage === "French" ? "Droite!" : "Right!"}</strong>.
+          With a deafening WHOOSH, the ship rocketed past the clouds. As they traveled, Leo practiced his {appliedLanguage} direction terms: <strong>{appliedLanguage === "عربية" ? "¡Izquierda!" : appliedLanguage === "French" ? "Gauche!" : "Left!"}</strong> and <strong>{appliedLanguage === "عربية" ? "¡Derecha!" : appliedLanguage === "French" ? "Droite!" : "Right!"}</strong>.
         </p>
         <p>
           Suddenly, a friendly cosmic creature appeared. "Welcome!" it chimed. Leo smiled, knowing that learning about {appliedTopic} was going to be his greatest adventure yet.
@@ -152,7 +152,7 @@ export default function AIContentGeneratorPage() {
 
   return (
     <motion.div initial="hidden" animate="visible" variants={staggerContainer} className="w-full space-y-8 max-w-6xl mx-auto pb-8 relative">
-      
+
       {/* Toast Notification */}
       <AnimatePresence>
         {toast && (
@@ -181,17 +181,17 @@ export default function AIContentGeneratorPage() {
       <motion.div variants={fadeInUp} className="relative overflow-hidden rounded-3xl bg-primary dark:bg-blue-600 text-on-primary p-10 shadow-xl">
         <div className="relative z-10 max-w-2xl">
           <h2 className="font-headline-lg text-headline-lg mb-4 text-white leading-tight">
-            Crafting the future of learning, <br/><span className="text-primary-fixed dark:text-blue-200">one prompt at a time.</span>
+            Crafting the future of learning, <br /><span className="text-primary-fixed dark:text-blue-200">one prompt at a time.</span>
           </h2>
           <p className="font-body-lg text-body-lg text-white/80">
             Generate pedagogically-sound lessons, interactive quizzes, and enchanting stories for any age group in seconds.
           </p>
         </div>
         <div className="absolute top-0 right-0 w-1/3 h-full opacity-10 dark:opacity-20 pointer-events-none">
-          <img 
-            className="w-full h-full object-cover" 
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqHFJmzrXnOnZxgntxbw05BRBttm6qpySQrfD1PAzwsiKbfFwlKbo6FQbO5EJHyWkgaOCsAONpccbal1rNSynIjDsRl2Ri24Rcw-f3h28oaBZzPkcNsQT9w1IJL6Ze6S5bKxISmUmQvNG0cTUMRiW5Xf3TblDtOhs7dxuVewgfatmc6kCWkml6YI73jRPd0RbwEckodsxuI78jA6GtYH0qL3rWCbODTRxdb4Otu9OsEK5o0dIX2Z5ErMyNqCr06rQ-UXR3GtqA6VbB" 
-            alt="AI Magic" 
+          <img
+            className="w-full h-full object-cover"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqHFJmzrXnOnZxgntxbw05BRBttm6qpySQrfD1PAzwsiKbfFwlKbo6FQbO5EJHyWkgaOCsAONpccbal1rNSynIjDsRl2Ri24Rcw-f3h28oaBZzPkcNsQT9w1IJL6Ze6S5bKxISmUmQvNG0cTUMRiW5Xf3TblDtOhs7dxuVewgfatmc6kCWkml6YI73jRPd0RbwEckodsxuI78jA6GtYH0qL3rWCbODTRxdb4Otu9OsEK5o0dIX2Z5ErMyNqCr06rQ-UXR3GtqA6VbB"
+            alt="AI Magic"
           />
         </div>
       </motion.div>
@@ -204,36 +204,36 @@ export default function AIContentGeneratorPage() {
               <span className="material-symbols-outlined text-secondary dark:text-amber-500">tune</span>
               Parameters
             </h3>
-            
+
             <div className="space-y-4">
               <div>
                 <label className="block font-label-caps text-label-caps text-on-surface-variant mb-2 text-[10px]">TOPIC / SUBJECT</label>
-                <input 
+                <input
                   value={topic}
                   onChange={(e) => setTopic(e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl border border-outline-variant bg-surface-container-lowest dark:bg-zinc-800 text-on-surface focus:ring-2 focus:ring-primary focus:border-transparent outline-none font-body-sm transition-all text-xs" 
-                  placeholder="e.g. The solar system" 
-                  type="text" 
+                  className="w-full px-4 py-3 rounded-xl border border-outline-variant bg-surface-container-lowest dark:bg-zinc-800 text-on-surface focus:ring-2 focus:ring-primary focus:border-transparent outline-none font-body-sm transition-all text-xs"
+                  placeholder="e.g. The solar system"
+                  type="text"
                 />
               </div>
-              
+
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block font-label-caps text-label-caps text-on-surface-variant mb-2 text-[10px]">LANGUAGE</label>
-                  <select 
+                  <select
                     value={language}
                     onChange={(e) => setLanguage(e.target.value)}
                     className="w-full px-4 py-3 rounded-xl border border-outline-variant bg-surface-container-lowest dark:bg-zinc-800 text-on-surface focus:ring-2 focus:ring-primary outline-none font-body-sm cursor-pointer transition-all text-xs"
                   >
                     <option>English</option>
-                    <option>Spanish</option>
+                    <option>عربية</option>
                     <option>French</option>
                     <option>German</option>
                   </select>
                 </div>
                 <div>
                   <label className="block font-label-caps text-label-caps text-on-surface-variant mb-2 text-[10px]">AGE GROUP</label>
-                  <select 
+                  <select
                     value={ageGroup}
                     onChange={(e) => setAgeGroup(e.target.value)}
                     className="w-full px-4 py-3 rounded-xl border border-outline-variant bg-surface-container-lowest dark:bg-zinc-800 text-on-surface focus:ring-2 focus:ring-primary outline-none font-body-sm cursor-pointer transition-all text-xs"
@@ -251,12 +251,12 @@ export default function AIContentGeneratorPage() {
                   DIFFICULTY LEVEL
                   <span className={`font-bold transition-colors ${diffColor}`} id="diff-label">{currentDiff}</span>
                 </label>
-                <input 
-                  className="w-full h-1.5 bg-surface-container-highest dark:bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-secondary" 
-                  id="diff-slider" 
-                  max="5" 
-                  min="1" 
-                  type="range" 
+                <input
+                  className="w-full h-1.5 bg-surface-container-highest dark:bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-secondary"
+                  id="diff-slider"
+                  max="5"
+                  min="1"
+                  type="range"
                   value={difficulty}
                   onChange={(e) => setDifficulty(Number(e.target.value))}
                 />
@@ -267,7 +267,7 @@ export default function AIContentGeneratorPage() {
               </div>
 
               <div className="pt-4 space-y-3">
-                <button 
+                <button
                   onClick={handleGenerate}
                   className="w-full bg-gradient-to-b from-primary to-[#003ea8] dark:from-blue-600 dark:to-blue-700 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-primary/30 active:scale-[0.98] transition-all flex items-center justify-center gap-3 disabled:opacity-50 text-xs"
                   disabled={isGenerating}
@@ -277,7 +277,7 @@ export default function AIContentGeneratorPage() {
                   </span>
                   {isGenerating ? "Thinking..." : "Generate Content"}
                 </button>
-                <button 
+                <button
                   onClick={() => {
                     setTopic("The Solar System");
                     setLanguage("English");
@@ -313,35 +313,32 @@ export default function AIContentGeneratorPage() {
         <div className="lg:col-span-8 space-y-6">
           {/* Tabs for Content Type */}
           <div className="flex gap-2 p-1.5 bg-surface-container-low dark:bg-zinc-900/60 rounded-2xl border border-outline-variant/50">
-            <button 
+            <button
               onClick={() => setActiveTab("lesson")}
-              className={`flex-1 py-3 px-4 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all ${
-                activeTab === "lesson" 
-                  ? "bg-white dark:bg-zinc-800 shadow-sm text-primary dark:text-blue-400 font-bold" 
+              className={`flex-1 py-3 px-4 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all ${activeTab === "lesson"
+                  ? "bg-white dark:bg-zinc-800 shadow-sm text-primary dark:text-blue-400 font-bold"
                   : "text-on-surface-variant hover:bg-white/30 dark:hover:bg-zinc-800/30"
-              }`}
+                }`}
             >
               <span className="material-symbols-outlined">description</span>
               Lesson Plan
             </button>
-            <button 
+            <button
               onClick={() => setActiveTab("quiz")}
-              className={`flex-1 py-3 px-4 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all ${
-                activeTab === "quiz" 
-                  ? "bg-white dark:bg-zinc-800 shadow-sm text-primary dark:text-blue-400 font-bold" 
+              className={`flex-1 py-3 px-4 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all ${activeTab === "quiz"
+                  ? "bg-white dark:bg-zinc-800 shadow-sm text-primary dark:text-blue-400 font-bold"
                   : "text-on-surface-variant hover:bg-white/30 dark:hover:bg-zinc-800/30"
-              }`}
+                }`}
             >
               <span className="material-symbols-outlined">quiz</span>
               Quiz Set
             </button>
-            <button 
+            <button
               onClick={() => setActiveTab("story")}
-              className={`flex-1 py-3 px-4 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all ${
-                activeTab === "story" 
-                  ? "bg-white dark:bg-zinc-800 shadow-sm text-primary dark:text-blue-400 font-bold" 
+              className={`flex-1 py-3 px-4 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all ${activeTab === "story"
+                  ? "bg-white dark:bg-zinc-800 shadow-sm text-primary dark:text-blue-400 font-bold"
                   : "text-on-surface-variant hover:bg-white/30 dark:hover:bg-zinc-800/30"
-              }`}
+                }`}
             >
               <span className="material-symbols-outlined">auto_stories</span>
               Story
@@ -349,8 +346,8 @@ export default function AIContentGeneratorPage() {
           </div>
 
           {/* Generated Content Canvas */}
-          <motion.div 
-            animate={{ 
+          <motion.div
+            animate={{
               scale: isGenerating ? 0.98 : 1,
               borderColor: isGenerating ? "#3b82f6" : "#c3c6d7",
               opacity: isGenerating ? 0.6 : 1
@@ -375,13 +372,13 @@ export default function AIContentGeneratorPage() {
                 </p>
               </div>
               <div className="flex gap-2">
-                <button 
+                <button
                   onClick={() => triggerToast("Edit mode loaded")}
                   className="p-2.5 rounded-xl border border-outline-variant/85 hover:bg-surface-container dark:hover:bg-zinc-800 text-on-surface-variant transition-colors"
                 >
                   <span className="material-symbols-outlined text-[18px]">edit</span>
                 </button>
-                <button 
+                <button
                   onClick={() => triggerToast("Content downloaded as JSON")}
                   className="p-2.5 rounded-xl border border-outline-variant/85 hover:bg-surface-container dark:hover:bg-zinc-800 text-on-surface-variant transition-colors"
                 >
@@ -415,7 +412,7 @@ export default function AIContentGeneratorPage() {
                 </span>
                 <p className="text-xs font-semibold text-on-surface-variant">Shared with 2 curriculum experts</p>
               </div>
-              <button 
+              <button
                 onClick={() => triggerToast(`Applied "${appliedTopic}" content directly to Level 1 Course!`)}
                 className="bg-primary dark:bg-blue-600 text-white px-6 py-2.5 rounded-xl font-bold hover:scale-105 active:scale-95 transition-all shadow-md flex items-center gap-2 text-xs shrink-0"
               >

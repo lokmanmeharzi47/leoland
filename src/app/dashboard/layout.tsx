@@ -48,10 +48,10 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         {children}
       </main>
 
-      {/* Big, kid-friendly bottom navigation (all screen sizes) */}
+      {/* Colorful Floating Bottom Navigation */}
       <nav className="fixed bottom-0 inset-x-0 z-40 pb-safe">
-        <div className="mx-auto max-w-2xl px-3 pb-3">
-          <div className="flex justify-around items-center bg-surface-container-lowest/95 backdrop-blur-xl rounded-3xl shadow-[0_8px_30px_rgba(0,0,0,0.12)] border border-outline-variant/15 p-2">
+        <div className="mx-auto max-w-3xl px-4 pb-4">
+          <div className="flex justify-around items-center bg-white/90 backdrop-blur-xl rounded-full shadow-[0_10px_40px_rgba(15,42,138,0.15)] border-2 border-white p-2">
             {navItems.map((item) => {
               const active = isActive(item.href);
               return (
@@ -59,19 +59,22 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                   key={item.href}
                   href={item.href}
                   aria-current={active ? "page" : undefined}
-                  className={`flex flex-col items-center justify-center gap-0.5 rounded-2xl px-2 py-2 min-w-[52px] transition-all active:scale-90 ${
+                  className={`relative flex flex-col items-center justify-center gap-1 rounded-full px-3 py-2 min-w-[64px] transition-all duration-300 active:scale-95 ${
                     active
-                      ? "bg-primary-container text-on-primary-container"
-                      : "text-on-surface-variant hover:bg-surface-container-high"
+                      ? "text-[#0F2A8A] -translate-y-2"
+                      : "text-slate-400 hover:text-[#0F2A8A] hover:bg-slate-50"
                   }`}
                 >
+                  {active && (
+                    <div className="absolute inset-0 bg-[#F5B21B] rounded-full shadow-[0_8px_20px_rgba(245,178,27,0.5)] -z-10"></div>
+                  )}
                   <span
-                    className="material-symbols-outlined text-[26px]"
+                    className="material-symbols-outlined text-[28px] drop-shadow-sm"
                     style={active ? { fontVariationSettings: "'FILL' 1" } : undefined}
                   >
                     {item.icon}
                   </span>
-                  <span className="text-[11px] font-bold leading-none">{t(item.label)}</span>
+                  <span className={`text-[10px] font-black uppercase tracking-wider ${active ? "text-[#0F2A8A]" : ""}`}>{t(item.label)}</span>
                 </Link>
               );
             })}

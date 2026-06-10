@@ -6,7 +6,7 @@ import { useState } from "react";
 export default function UserManagementPage() {
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState<any>(null);
-  
+
   // Search and Filter States
   const [searchQuery, setSearchQuery] = useState("");
   const [langFilter, setLangFilter] = useState("All Languages");
@@ -34,7 +34,7 @@ export default function UserManagementPage() {
       email: "leo.t@edu.leoland.com",
       role: "Student",
       roleColor: "bg-blue-500/10 text-blue-500",
-      language: "English / Spanish",
+      language: "English / عربية",
       status: "Active",
       statusColor: "bg-success/10 text-success",
       statusDot: "bg-success",
@@ -162,20 +162,20 @@ export default function UserManagementPage() {
 
   // Filter Logic
   const filteredUsers = users.filter((user) => {
-    const matchesSearch = 
-      user.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+    const matchesSearch =
+      user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       user.email.toLowerCase().includes(searchQuery.toLowerCase());
-    
-    const matchesLang = 
-      langFilter === "All Languages" || 
+
+    const matchesLang =
+      langFilter === "All Languages" ||
       user.language.toLowerCase().includes(langFilter.replace("Only", "").trim().toLowerCase());
 
-    const matchesStatus = 
-      statusFilter === "All Statuses" || 
+    const matchesStatus =
+      statusFilter === "All Statuses" ||
       user.status.toLowerCase() === statusFilter.replace("Only", "").trim().toLowerCase();
 
-    const matchesSub = 
-      subFilter === "All Subscriptions" || 
+    const matchesSub =
+      subFilter === "All Subscriptions" ||
       user.sub.toLowerCase() === subFilter.trim().toLowerCase();
 
     return matchesSearch && matchesLang && matchesStatus && matchesSub;
@@ -198,7 +198,7 @@ export default function UserManagementPage() {
 
   return (
     <motion.div initial="hidden" animate="visible" variants={staggerContainer} className="w-full space-y-8 relative">
-      
+
       {/* Toast Notification */}
       <AnimatePresence>
         {toast && (
@@ -243,25 +243,25 @@ export default function UserManagementPage() {
           <div className="flex flex-wrap items-center gap-4">
             <div className="flex-1 min-w-[200px]">
               <label className="block font-label-caps text-[10px] font-bold text-on-surface-variant mb-2">SEARCH NAME OR EMAIL</label>
-              <input 
+              <input
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full px-3.5 py-2.5 bg-surface-container-low dark:bg-zinc-800 border border-outline-variant/60 dark:border-zinc-850 text-xs rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all text-on-surface" 
-                placeholder="e.g. Leo..." 
+                className="w-full px-3.5 py-2.5 bg-surface-container-low dark:bg-zinc-800 border border-outline-variant/60 dark:border-zinc-850 text-xs rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all text-on-surface"
+                placeholder="e.g. Leo..."
                 type="text"
               />
             </div>
-            
+
             <div className="w-40">
               <label className="block font-label-caps text-[10px] font-bold text-on-surface-variant mb-2">LANGUAGE</label>
-              <select 
+              <select
                 value={langFilter}
                 onChange={(e) => setLangFilter(e.target.value)}
                 className="w-full px-3 py-2.5 bg-surface-container-low dark:bg-zinc-800 border border-outline-variant/60 dark:border-zinc-850 text-xs rounded-xl focus:ring-2 focus:ring-primary outline-none text-on-surface"
               >
                 <option>All Languages</option>
                 <option>English</option>
-                <option>Spanish</option>
+                <option>عربية</option>
                 <option>Mandarin</option>
                 <option>French</option>
                 <option>Japanese</option>
@@ -270,7 +270,7 @@ export default function UserManagementPage() {
 
             <div className="w-40">
               <label className="block font-label-caps text-[10px] font-bold text-on-surface-variant mb-2">STATUS</label>
-              <select 
+              <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
                 className="w-full px-3 py-2.5 bg-surface-container-low dark:bg-zinc-800 border border-outline-variant/60 dark:border-zinc-850 text-xs rounded-xl focus:ring-2 focus:ring-primary outline-none text-on-surface"
@@ -284,7 +284,7 @@ export default function UserManagementPage() {
 
             <div className="w-40">
               <label className="block font-label-caps text-[10px] font-bold text-on-surface-variant mb-2">SUBSCRIPTION</label>
-              <select 
+              <select
                 value={subFilter}
                 onChange={(e) => setSubFilter(e.target.value)}
                 className="w-full px-3 py-2.5 bg-surface-container-low dark:bg-zinc-800 border border-outline-variant/60 dark:border-zinc-850 text-xs rounded-xl focus:ring-2 focus:ring-primary outline-none text-on-surface"
@@ -295,9 +295,9 @@ export default function UserManagementPage() {
                 <option>Free Tier</option>
               </select>
             </div>
-            
+
             <div className="self-end pb-0.5">
-              <button 
+              <button
                 onClick={() => {
                   setSearchQuery("");
                   setLangFilter("All Languages");
@@ -386,7 +386,7 @@ export default function UserManagementPage() {
                       </div>
                     </td>
                     <td className="px-6 py-4 text-right" onClick={(e) => e.stopPropagation()}>
-                      <button 
+                      <button
                         onClick={() => handleRowClick(user)}
                         className="p-1.5 text-on-surface-variant hover:text-primary dark:hover:text-blue-400 hover:bg-surface-container dark:hover:bg-zinc-800 rounded-lg transition-all"
                       >
@@ -413,14 +413,14 @@ export default function UserManagementPage() {
       <AnimatePresence>
         {isDetailOpen && selectedUser && (
           <>
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 0.5 }}
               exit={{ opacity: 0 }}
               className="fixed inset-0 bg-black z-40"
               onClick={() => setIsDetailOpen(false)}
             />
-            <motion.div 
+            <motion.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
@@ -441,14 +441,14 @@ export default function UserManagementPage() {
                   <div className="flex-1">
                     {isEditing ? (
                       <div className="space-y-3">
-                        <input 
-                          type="text" 
+                        <input
+                          type="text"
                           value={editName}
                           onChange={(e) => setEditName(e.target.value)}
                           className="w-full text-sm font-bold bg-surface-container-low dark:bg-zinc-800 border border-outline-variant rounded-md px-2 py-1 outline-none text-on-surface"
                         />
-                        <input 
-                          type="email" 
+                        <input
+                          type="email"
                           value={editEmail}
                           onChange={(e) => setEditEmail(e.target.value)}
                           className="w-full text-xs bg-surface-container-low dark:bg-zinc-800 border border-outline-variant rounded-md px-2 py-1 outline-none text-on-surface"
@@ -460,13 +460,13 @@ export default function UserManagementPage() {
                         <p className="text-xs text-on-surface-variant mt-1">{selectedUser.email}</p>
                       </>
                     )}
-                    
+
                     <p className="text-[11px] text-on-surface-variant font-semibold mt-2">Joined: {selectedUser.joined}</p>
-                    
+
                     <div className="mt-4 flex flex-wrap gap-2">
                       <span className="px-2.5 py-0.5 bg-amber-500/10 text-amber-500 rounded-full text-[10px] font-bold uppercase tracking-wider">
                         {isEditing ? (
-                          <select 
+                          <select
                             value={editSub}
                             onChange={(e) => setEditSub(e.target.value)}
                             className="bg-transparent text-[10px] font-bold uppercase text-amber-500 outline-none cursor-pointer"
@@ -488,8 +488,8 @@ export default function UserManagementPage() {
                 {isEditing && (
                   <div className="p-4 bg-surface-container-low dark:bg-zinc-800/35 rounded-xl border border-outline-variant/30 space-y-3">
                     <label className="block text-[10px] font-bold text-on-surface-variant uppercase">Language Spoken</label>
-                    <input 
-                      type="text" 
+                    <input
+                      type="text"
                       value={editLang}
                       onChange={(e) => setEditLang(e.target.value)}
                       className="w-full text-xs bg-white dark:bg-zinc-900 border border-outline-variant rounded-md px-3 py-2 outline-none text-on-surface"
@@ -562,13 +562,13 @@ export default function UserManagementPage() {
               </div>
 
               <div className="p-6 border-t border-outline-variant/20 grid grid-cols-2 gap-4 bg-surface-container-low dark:bg-zinc-900/90 z-10">
-                <button 
+                <button
                   onClick={handleStatusToggle}
                   className="w-full py-3 bg-red-600 text-white font-bold rounded-xl text-xs hover:bg-red-500 shadow-md transition-all active:scale-98"
                 >
                   {selectedUser.status === "Suspended" ? "ACTIVATE ACCOUNT" : "SUSPEND ACCOUNT"}
                 </button>
-                <button 
+                <button
                   onClick={() => setIsEditing(true)}
                   className="w-full py-3 bg-primary dark:bg-blue-600 text-white font-bold rounded-xl text-xs shadow-md hover:scale-[1.02] active:scale-98 transition-all"
                 >

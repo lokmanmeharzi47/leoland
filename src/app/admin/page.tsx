@@ -71,9 +71,9 @@ export default function AdminDashboardPage() {
           </nav>
           <h2 className="font-headline-lg text-headline-lg text-text-main">Executive Overview</h2>
         </div>
-        
+
         <div className="flex items-center gap-3 relative">
-          <div 
+          <div
             onClick={() => setIsDatePickerOpen(!isDatePickerOpen)}
             className="bg-surface-container-lowest dark:bg-zinc-900 px-4 py-2 rounded-xl border border-outline-variant flex items-center gap-3 cursor-pointer hover:bg-surface-container-low dark:hover:bg-zinc-800 transition-colors shadow-sm select-none"
           >
@@ -86,7 +86,7 @@ export default function AdminDashboardPage() {
             {isDatePickerOpen && (
               <>
                 <div className="fixed inset-0 z-10" onClick={() => setIsDatePickerOpen(false)} />
-                <motion.div 
+                <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 10 }}
@@ -99,9 +99,8 @@ export default function AdminDashboardPage() {
                         setSelectedDateRange(range);
                         setIsDatePickerOpen(false);
                       }}
-                      className={`px-4 py-2 text-xs font-semibold cursor-pointer hover:bg-primary/5 dark:hover:bg-blue-500/10 hover:text-primary dark:hover:text-blue-400 transition-colors ${
-                        selectedDateRange === range ? "text-primary dark:text-blue-400 bg-primary/5 dark:bg-blue-500/5 font-bold" : "text-on-surface-variant"
-                      }`}
+                      className={`px-4 py-2 text-xs font-semibold cursor-pointer hover:bg-primary/5 dark:hover:bg-blue-500/10 hover:text-primary dark:hover:text-blue-400 transition-colors ${selectedDateRange === range ? "text-primary dark:text-blue-400 bg-primary/5 dark:bg-blue-500/5 font-bold" : "text-on-surface-variant"
+                        }`}
                     >
                       {range}
                     </div>
@@ -111,7 +110,7 @@ export default function AdminDashboardPage() {
             )}
           </AnimatePresence>
 
-          <button 
+          <button
             onClick={handleDownload}
             className="p-2.5 bg-surface-container-lowest dark:bg-zinc-900 border border-outline-variant rounded-xl hover:bg-surface-container-low dark:hover:bg-zinc-800 text-on-surface transition-colors shadow-sm"
             title="Download Report"
@@ -214,7 +213,7 @@ export default function AdminDashboardPage() {
                     <div className="w-10 h-10 bg-secondary/20 rounded-full flex items-center justify-center animate-ping absolute -left-3 -top-3"></div>
                     <div className="w-4 h-4 bg-secondary rounded-full relative shadow-lg"></div>
                     <div className="absolute top-6 left-0 bg-white dark:bg-zinc-850 shadow-xl p-2 rounded-lg border border-secondary/20 w-32 backdrop-blur-md">
-                      <p className="font-label-caps text-[9px] text-on-surface-variant">SPANISH</p>
+                      <p className="font-label-caps text-[9px] text-on-surface-variant">عربية</p>
                       <p className="font-bold text-xs text-text-main">28.1k Students</p>
                     </div>
                   </div>
@@ -232,7 +231,7 @@ export default function AdminDashboardPage() {
             </div>
             <div className="flex items-center gap-2">
               <div className="w-2.5 h-2.5 bg-secondary rounded-full"></div>
-              <span className="text-xs font-semibold text-on-surface-variant">Spanish (22%)</span>
+              <span className="text-xs font-semibold text-on-surface-variant">عربية (22%)</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-2.5 h-2.5 bg-tertiary dark:bg-purple-500 rounded-full"></div>
@@ -255,7 +254,7 @@ export default function AdminDashboardPage() {
             <div className="space-y-4 overflow-y-auto max-h-[260px] pr-2 flex-1" style={{ scrollbarWidth: 'thin' }}>
               <div className="p-3.5 bg-surface-container-low dark:bg-zinc-800/30 rounded-xl border-l-4 border-secondary hover:bg-surface-container dark:hover:bg-zinc-800 transition-colors cursor-default">
                 <p className="text-body-sm font-semibold mb-1 text-text-main">Unusual Activity Spike</p>
-                <p className="text-[12px] text-on-surface-variant">Spanish pronunciation modules seeing 4x traffic from Lisbon region. Recommending server scale-up.</p>
+                <p className="text-[12px] text-on-surface-variant">عربية pronunciation modules seeing 4x traffic from Lisbon region. Recommending server scale-up.</p>
                 <p className="text-[9px] text-outline mt-2 font-data-mono uppercase">2 mins ago</p>
               </div>
               <div className="p-3.5 bg-surface-container-low dark:bg-zinc-800/30 rounded-xl border-l-4 border-primary dark:border-blue-500 hover:bg-surface-container dark:hover:bg-zinc-800 transition-colors cursor-default">

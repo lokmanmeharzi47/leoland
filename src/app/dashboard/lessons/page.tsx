@@ -17,9 +17,9 @@ export default function LessonsPage() {
   };
 
   return (
-    <motion.div 
-      initial="hidden" 
-      animate="visible" 
+    <motion.div
+      initial="hidden"
+      animate="visible"
       variants={staggerContainer}
       className="max-w-container-max mx-auto px-margin-mobile md:px-lg py-md lg:py-xl flex-grow w-full"
     >
@@ -32,7 +32,7 @@ export default function LessonsPage() {
               <span className="font-label-caps text-label-caps uppercase tracking-widest">Ongoing Lesson</span>
             </div>
             <h1 className="font-display-lg text-display-lg-mobile md:text-display-lg leading-tight">Wild Animals: The Jungle</h1>
-            <p className="font-body-lg text-body-lg opacity-90 max-w-[36rem]">Master jungle vocabulary and grammar in Spanish! Join Leo on a trip to the Amazon Rainforest.</p>
+            <p className="font-body-lg text-body-lg opacity-90 max-w-[36rem]">Master jungle vocabulary and grammar in عربية! Join Leo on a trip to the Amazon Rainforest.</p>
             <div className="flex flex-col sm:flex-row items-center gap-md pt-sm justify-center md:justify-start">
               <button className="bg-secondary-container text-on-secondary-container font-ui-button px-xl py-md rounded-full flex items-center gap-sm hover:scale-105 transition-transform shadow-lg active:scale-95 group">
                 <span className="material-symbols-outlined text-2xl group-hover:rotate-12 transition-transform" style={{ fontVariationSettings: "'FILL' 1" }}>play_arrow</span>
@@ -48,13 +48,13 @@ export default function LessonsPage() {
           </div>
           <div className="relative flex-1 flex justify-center">
             <div className="absolute inset-0 bg-white/10 blur-3xl rounded-full scale-110"></div>
-            <motion.div 
-              animate={{ y: [-15, 15, -15] }} 
+            <motion.div
+              animate={{ y: [-15, 15, -15] }}
               transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
             >
-              <img 
-                alt="Leo the Lion in a jungle" 
-                className="relative z-10 w-full max-w-[320px] drop-shadow-2xl" 
+              <img
+                alt="Leo the Lion in a jungle"
+                className="relative z-10 w-full max-w-[320px] drop-shadow-2xl"
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuBK3vAL3kXjo4HGkOzSBTSUD14TmutdXHI0eNLgnX4yeFQou2XR2pmrBcVB6k5ec-7zkeO_rvgjvnykRK_I7LLjVjpSWYC0ZEQh9CfQShi7rR10S6OlnCWesOP9QrlTfOLnM5S68PWHnMqn4yTom_3PzVOQZh0GxARgc7JuyXEWZ7eL4tiYrQaPWIT4D_YvWSZuQzSRdaiFG9HaUsEi7zuOFyxjMkDpwOyCWV4O6ilAU5Tf1i0Vp4LEwk0QtWaGpI6OUTR_DxWq24Lm"
               />
             </motion.div>
@@ -71,13 +71,13 @@ export default function LessonsPage() {
           </button>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-gutter">
-          {/* Spanish */}
+          {/* عربية */}
           <div className="glass-card rounded-[2rem] p-md shadow-md border border-outline-variant/10 flex flex-col hover:-translate-y-1 transition-transform">
             <div className="flex items-center justify-between mb-md">
               <div className="w-12 h-12 rounded-2xl bg-secondary-fixed flex items-center justify-center text-2xl">🇪🇸</div>
               <span className="bg-secondary-fixed-dim/20 text-on-secondary-fixed-variant px-sm py-1 rounded-full text-xs font-bold uppercase tracking-wider">Fluent Goal</span>
             </div>
-            <h3 className="font-headline-sm text-headline-sm mb-xs">Spanish</h3>
+            <h3 className="font-headline-sm text-headline-sm mb-xs">عربية</h3>
             <p className="text-on-surface-variant text-sm mb-lg">7 Lessons remaining to unlock Tier 3.</p>
             <div className="space-y-sm mb-lg">
               <div className="bg-surface p-sm rounded-xl border border-outline-variant/30">
@@ -184,7 +184,7 @@ export default function LessonsPage() {
                 <button className="text-primary font-ui-button text-sm hover:underline">Set Reminder</button>
               </div>
             </div>
-            
+
             <div className="flex items-center gap-md p-md bg-white rounded-3xl border border-outline-variant/20 shadow-sm hover:shadow-md transition-shadow group cursor-pointer">
               <div className="w-16 h-16 rounded-2xl bg-surface-container flex items-center justify-center shrink-0 group-hover:bg-tertiary-container group-hover:text-white transition-colors">
                 <span className="material-symbols-outlined text-3xl">restaurant</span>

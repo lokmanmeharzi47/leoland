@@ -115,9 +115,9 @@ export default function StoriesPage() {
   ];
 
   return (
-    <motion.div 
-      initial="hidden" 
-      animate="visible" 
+    <motion.div
+      initial="hidden"
+      animate="visible"
       variants={staggerContainer}
       className="flex-grow w-full max-w-[1440px] mx-auto overflow-x-hidden flex"
     >
@@ -137,22 +137,21 @@ export default function StoriesPage() {
         <div className="space-y-lg">
           {/* Search */}
           <div className="relative group">
-            <input className="w-full h-12 pl-10 pr-4 rounded-xl bg-surface-container border-none focus:ring-2 focus:ring-primary-container font-body-md outline-none transition-shadow" placeholder="Search stories..." type="text"/>
+            <input className="w-full h-12 pl-10 pr-4 rounded-xl bg-surface-container border-none focus:ring-2 focus:ring-primary-container font-body-md outline-none transition-shadow" placeholder="Search stories..." type="text" />
             <span className="material-symbols-outlined absolute left-3 top-3 text-on-surface-variant">search</span>
           </div>
           {/* Languages */}
           <div>
             <h3 className="font-label-caps text-label-caps text-on-surface-variant mb-sm uppercase tracking-widest">Language</h3>
             <div className="flex flex-col gap-xs">
-              {['English', 'Spanish', 'French'].map(lang => (
-                <button 
+              {['English', 'عربية', 'French'].map(lang => (
+                <button
                   key={lang}
                   onClick={() => setActiveLanguage(lang)}
-                  className={`flex items-center justify-between px-md py-sm rounded-xl transition-all ${
-                    activeLanguage === lang 
-                      ? 'bg-primary-container text-on-primary-container font-bold' 
+                  className={`flex items-center justify-between px-md py-sm rounded-xl transition-all ${activeLanguage === lang
+                      ? 'bg-primary-container text-on-primary-container font-bold'
                       : 'text-on-surface-variant hover:bg-surface-container-high'
-                  }`}
+                    }`}
                 >
                   <span>{lang}</span>
                   {activeLanguage === lang && <span className="material-symbols-outlined text-sm">check</span>}
@@ -165,14 +164,13 @@ export default function StoriesPage() {
             <h3 className="font-label-caps text-label-caps text-on-surface-variant mb-sm uppercase tracking-widest">Difficulty</h3>
             <div className="flex flex-col gap-xs">
               {['Level 1: Beginner', 'Level 2: Intermediate', 'Level 3: Explorer'].map(diff => (
-                <button 
+                <button
                   key={diff}
                   onClick={() => setActiveDifficulty(diff)}
-                  className={`flex items-center px-md py-sm rounded-xl transition-all text-left ${
-                    activeDifficulty === diff 
-                      ? 'bg-primary-container text-on-primary-container font-bold' 
+                  className={`flex items-center px-md py-sm rounded-xl transition-all text-left ${activeDifficulty === diff
+                      ? 'bg-primary-container text-on-primary-container font-bold'
                       : 'text-on-surface-variant hover:bg-surface-container-high'
-                  }`}
+                    }`}
                 >
                   {diff}
                 </button>
@@ -201,8 +199,8 @@ export default function StoriesPage() {
         {/* Hero Feature Section */}
         <motion.section variants={fadeInUp} className="p-margin-mobile md:p-lg pt-base">
           <div className="relative w-full h-80 rounded-[32px] overflow-hidden group shadow-[0_8px_30px_rgb(37,99,235,0.15)] cursor-pointer">
-            <img 
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+            <img
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuAshwjd7qWaGj_2CpWjvlkTR2waaeLK_-WEO_yAw7EDjVMBp2WMY9wc8_v8eZBelb_sKk04XcdxeSJmQ5-6O4YIoE6zsOY3a9P7qiHXybJiiJwAIne2KMXPEURrxma1WEaZt6OmbmGH2wSazt4lyFKYHCROKSHNaXjKFFanXThqZyBVomiy1CgrGJxZ6S2f3vELMkTgCX2S2Mf8sh9m9tUeqVgLNOHzK2SPiDe1sBMdJiyZrG9phODPnO1aQ0LLZV0cm1f9lEjNxwdT"
               alt="Story of the Day"
             />

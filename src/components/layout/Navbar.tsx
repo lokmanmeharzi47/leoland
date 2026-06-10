@@ -19,8 +19,11 @@ export function Navbar() {
   return (
     <nav className="bg-surface/80 backdrop-blur-md dark:bg-surface-container-highest/80 w-full top-0 sticky z-50 shadow-[0_8px_30px_rgb(37,99,235,0.08)]">
       <div className="flex justify-between items-center px-margin-mobile md:px-lg h-20 w-full max-w-container-max mx-auto">
-        <Link href="/" className="font-display-lg text-headline-sm text-primary dark:text-inverse-primary tracking-tight">
-          LeoLand
+        <Link href="/" className="flex items-center gap-2">
+          <img src="https://img.icons8.com/fluency/512/lion.png" alt="Lion Logo" className="w-10 h-10 object-contain drop-shadow-sm" />
+          <span className="font-display-lg text-headline-sm text-primary dark:text-inverse-primary tracking-tight font-extrabold">
+            LeoLand
+          </span>
         </Link>
 
         {/* Desktop Links */}
