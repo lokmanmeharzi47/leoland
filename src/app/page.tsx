@@ -96,7 +96,7 @@ export default function LandingPage() {
               {/* Leo Illustration Area */}
               <div className="w-full md:w-1/2 relative flex justify-center">
                  <div className="w-64 h-64 bg-[#F5B21B] rounded-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 blur-3xl opacity-40"></div>
-                 <img src="https://img.icons8.com/fluency/512/lion.png" alt="Leo the Lion" className="w-80 h-80 object-contain drop-shadow-[0_20px_20px_rgba(0,0,0,0.5)] z-10" />
+                 <div className="text-[200px] drop-shadow-[0_20px_20px_rgba(0,0,0,0.5)] z-10 leading-none select-none">🦁</div>
                  
                  {/* Learning Card Floating */}
                  <motion.div animate={floatAnimation} className="absolute -right-4 top-10 bg-white p-4 rounded-3xl shadow-xl border-4 border-[#F5B21B] rotate-12">
@@ -188,7 +188,7 @@ export default function LandingPage() {
             {[
               { title: "Word Match Quest", time: "5 mins", xp: "+50 XP", difficulty: "Easy", img: "https://cdn-icons-png.flaticon.com/512/103/103445.png", color: "bg-pink-100" },
               { title: "Pronunciation Challenge", time: "10 mins", xp: "+120 XP", difficulty: "Medium", img: "https://cdn-icons-png.flaticon.com/512/709/709748.png", color: "bg-blue-100" },
-              { title: "Memory Adventure", time: "8 mins", xp: "+80 XP", difficulty: "Easy", img: "https://cdn-icons-png.flaticon.com/512/867/867803.png", color: "bg-yellow-100" }
+              { title: "Memory Adventure", time: "8 mins", xp: "+80 XP", difficulty: "Easy", img: "https://cdn-icons-png.flaticon.com/512/3405/3405080.png", color: "bg-yellow-100" }
             ].map((game, idx) => (
               <motion.div key={idx} variants={fadeInUp} className="bg-white rounded-[40px] p-6 shadow-xl border-2 border-transparent hover:border-[#F5B21B] transition-colors cursor-pointer group">
                 <div className={`w-full h-48 ${game.color} rounded-3xl mb-6 flex items-center justify-center overflow-hidden`}>
@@ -363,7 +363,7 @@ export default function LandingPage() {
                <p className="text-blue-200 font-medium mb-6">Making language learning the greatest adventure for children worldwide.</p>
                {/* Mascot Small */}
                <div className="w-24 h-24 bg-white/10 backdrop-blur-md rounded-full p-2 flex items-center justify-center shadow-lg border border-white/20">
-                 <img src="https://img.icons8.com/fluency/512/lion.png" alt="Leo Mascot" className="w-20 h-20 object-contain" />
+                 <div className="text-[60px] leading-none select-none">🦁</div>
                </div>
             </div>
             

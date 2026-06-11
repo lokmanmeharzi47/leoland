@@ -1,31 +1,55 @@
 import Link from "next/link";
 
+const columns = [
+  { title: "Worlds", links: ["Vocabulary Forest", "Grammar Castle", "Speaking Ocean", "Games"] },
+  { title: "Parents", links: ["Parent Dashboard", "How It Works", "Pricing & Plans", "Safety & Privacy"] },
+];
+
 export function Footer() {
   return (
-    <footer className="bg-surface-container-highest dark:bg-surface-container-lowest w-full py-lg mt-xl glass-card">
-      <div className="max-w-container-max mx-auto px-margin-mobile md:px-lg flex flex-col md:flex-row justify-between items-center gap-md">
-        <div className="flex flex-col items-center md:items-start gap-base">
-          <span className="font-display-lg text-headline-sm text-primary">LeoLand</span>
-          <p className="font-body-md text-on-surface-variant max-w-[20rem] text-center md:text-left">
-            Building the world's most joyful language learning ecosystem for the next generation.
-          </p>
+    <footer className="relative overflow-hidden rounded-t-[48px] md:rounded-t-[64px] bg-[#0F2A8A] text-white pt-16 pb-10 px-6 mt-16">
+      <div className="absolute -top-10 right-10 text-[180px] opacity-10 pointer-events-none select-none">📚</div>
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-12">
+          <div className="col-span-2 md:col-span-1">
+            <div className="flex items-center gap-2 mb-4">
+              <span className="text-4xl">🦁</span>
+              <span className="text-3xl font-black">Leo<span className="text-[#F5B21B]">Land</span></span>
+            </div>
+            <p className="text-blue-200 font-semibold text-sm max-w-[20rem]">
+              Making language learning the greatest adventure for children everywhere.
+            </p>
+          </div>
+
+          {columns.map((col) => (
+            <div key={col.title}>
+              <h4 className="font-black text-lg mb-4">{col.title}</h4>
+              <ul className="space-y-3 text-blue-200 font-semibold text-sm">
+                {col.links.map((l) => (
+                  <li key={l}><Link href="#" className="hover:text-[#F5B21B] transition-colors">{l}</Link></li>
+                ))}
+              </ul>
+            </div>
+          ))}
+
+          <div>
+            <h4 className="font-black text-lg mb-4">Say Hi</h4>
+            <div className="flex gap-3 mb-4">
+              {["📘", "📸", "▶️"].map((s, i) => (
+                <span key={i} className="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center text-xl hover:bg-[#F5B21B] transition-colors cursor-pointer">{s}</span>
+              ))}
+            </div>
+            <p className="text-blue-200 font-semibold text-sm">hello@leoland.com</p>
+          </div>
         </div>
-        <div className="flex gap-lg flex-wrap justify-center">
-          <Link href="#" className="font-label-caps text-label-caps text-on-surface-variant hover:underline decoration-secondary underline-offset-4 transition-all">
-            Privacy Policy
-          </Link>
-          <Link href="#" className="font-label-caps text-label-caps text-on-surface-variant hover:underline decoration-secondary underline-offset-4 transition-all">
-            Terms of Service
-          </Link>
-          <Link href="#" className="font-label-caps text-label-caps text-on-surface-variant hover:underline decoration-secondary underline-offset-4 transition-all">
-            Parent Guide
-          </Link>
-          <Link href="#" className="font-label-caps text-label-caps text-on-surface-variant hover:underline decoration-secondary underline-offset-4 transition-all">
-            Support
-          </Link>
-        </div>
-        <div className="text-right">
-          <p className="font-body-md text-on-surface-variant opacity-60">© {new Date().getFullYear()} LeoLand Edutainment. All rights reserved.</p>
+
+        <div className="border-t border-white/15 pt-6 flex flex-col md:flex-row justify-between items-center gap-3 text-blue-300 font-semibold text-sm">
+          <p>© {new Date().getFullYear()} LeoLand Education. All rights reserved.</p>
+          <div className="flex gap-6">
+            <Link href="#" className="hover:text-white">Terms of Adventure</Link>
+            <Link href="#" className="hover:text-white">Privacy</Link>
+            <Link href="#" className="hover:text-white">Parent Guide</Link>
+          </div>
         </div>
       </div>
     </footer>

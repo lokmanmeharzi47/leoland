@@ -77,9 +77,12 @@ export default function AdminLayoutClient({
         }`}
       >
         <div className="px-6 mb-8 flex justify-between items-center">
-          <div>
-            <h1 className="font-headline-md text-headline-md font-bold text-primary dark:text-blue-500">LeoLand Admin</h1>
-            <p className="font-label-caps text-label-caps text-on-surface-variant uppercase mt-1">Enterprise Console</p>
+          <div className="flex items-center gap-2">
+            <span className="text-3xl leading-none">🦁</span>
+            <div>
+              <h1 className="font-headline-md text-headline-md font-bold text-primary dark:text-blue-500">LeoLand Admin</h1>
+              <p className="font-label-caps text-label-caps text-on-surface-variant uppercase mt-1">Enterprise Console</p>
+            </div>
           </div>
           <button
             onClick={() => setIsSidebarOpen(false)}
@@ -211,11 +214,8 @@ export default function AdminLayoutClient({
               Create New
             </button>
             
-            <div className="w-8 h-8 rounded-full overflow-hidden border border-outline-variant/50 cursor-pointer shrink-0">
-              <img
-                alt="User Profile"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqQ2ikvD9FEWmeMJE9hzj0Z5baC5oMMz0aSo8F0ROf4KjqrChr2Ob94qeSg43hNnE8lRjs-p6bBQ53ph98LDwDIFrWPFBeTZMUrVIqxiltb_bTK5HPJadTjsptFfqWUcY70HM2MolahxeEPBg58ERx46JFjq1PRfhgK_pgUZGpx17ZwG8AvnJq4rivSY23z4gLUu6Y-lwILA-9-yygm3_G7bUjtcyFqgxTeA6FSD8LcKn7xdYgLcOwUzC64zMV2rsf1gfglrqBdIr7"
-              />
+            <div className="w-8 h-8 rounded-full bg-primary/10 dark:bg-blue-500/15 flex items-center justify-center text-base cursor-pointer shrink-0 border border-outline-variant/50">
+              👩‍🏫
             </div>
           </div>
         </header>

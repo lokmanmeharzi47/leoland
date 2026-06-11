@@ -217,7 +217,9 @@ export default function AdminDashboardPage() {
                       <p className="font-bold text-xs text-text-main">28.1k Students</p>
                     </div>
                   </div>
-                  <img alt="World Map Distribution" className="w-full h-full object-contain opacity-60 dark:opacity-40" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjIwl5AR_CSJbmIDjb5OHiIy8D2yWg4ScOH6U9cwihdNWXOoQW1BV3VvdoM1lq4m5KOQ5gTx40AaTyBgiKvTDJKk0QGWkfKimZzvudK2E323kFkwBDajFJNa4ktb_8MiC_IH4EpdVeS8Y9Fai5IfyeopbKGjsiQXMAQ9mQnA5z_JwZxrOVdvi_xEE0v80ZFj_fHvTl7w8r_W3r6_V81PS73LeUorAxLe1fWzoZEWihzX7Vj37pmftucKeiD_Vto-DJhAbPnueiMaEx" />
+                  <div className="w-full h-full flex items-center justify-center text-on-surface-variant/30">
+                    <span className="material-symbols-outlined text-[160px]">public</span>
+                  </div>
                 </div>
               </div>
             </div>

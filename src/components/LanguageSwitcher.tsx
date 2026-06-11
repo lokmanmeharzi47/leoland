@@ -26,11 +26,11 @@ export function LanguageSwitcher() {
         aria-label={t("lang.switch")}
         aria-haspopup="menu"
         aria-expanded={open}
-        className="flex items-center gap-2 px-3 py-2 rounded-full bg-surface-container-high text-on-surface font-bold active:scale-95 transition-transform"
+        className="flex items-center gap-2 px-3 py-2 rounded-full bg-white border-2 border-[#0F2A8A]/10 text-[#0F2A8A] font-black active:scale-95 transition-transform shadow-sm"
       >
         <span className="text-xl leading-none">{current.flag}</span>
-        <span className="hidden sm:inline text-body-md">{current.native}</span>
-        <span className="material-symbols-outlined text-on-surface-variant text-[20px]">
+        <span className="hidden sm:inline text-sm">{current.native}</span>
+        <span className="material-symbols-outlined text-[#0F2A8A]/50 text-[20px]">
           expand_more
         </span>
       </button>
@@ -38,7 +38,7 @@ export function LanguageSwitcher() {
       {open && (
         <div
           role="menu"
-          className="absolute end-0 mt-2 w-44 bg-surface-container-lowest rounded-2xl shadow-xl border border-outline-variant/20 p-2 z-50"
+          className="absolute end-0 mt-2 w-44 bg-white rounded-2xl shadow-[0_10px_30px_rgba(15,42,138,0.15)] border-2 border-[#0F2A8A]/10 p-2 z-50"
         >
           {LANGUAGES.map((l) => (
             <button
@@ -49,10 +49,10 @@ export function LanguageSwitcher() {
                 setLang(l.code);
                 setOpen(false);
               }}
-              className={`w-full flex items-center gap-3 px-3 py-3 rounded-xl text-start transition-colors ${
+              className={`w-full flex items-center gap-3 px-3 py-3 rounded-xl text-start transition-colors font-bold ${
                 l.code === lang
-                  ? "bg-primary-container text-on-primary-container font-bold"
-                  : "hover:bg-surface-container-high text-on-surface"
+                  ? "bg-[#0F2A8A] text-white"
+                  : "hover:bg-[#0F2A8A]/5 text-[#0F2A8A]"
               }`}
             >
               <span className="text-2xl leading-none">{l.flag}</span>

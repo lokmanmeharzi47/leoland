@@ -3,127 +3,102 @@
 import { motion } from "framer-motion";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import Link from "next/link";
+import { ChunkyButton, Floaty } from "@/components/leo/ui";
+
+const wordCards = [
+  { emoji: "🐱", word: "Le chat", meaning: "The cat" },
+  { emoji: "🌳", word: "L'arbre", meaning: "The tree" },
+  { emoji: "🏃", word: "Il court", meaning: "He runs" },
+];
+
+const shelfBooks = [
+  { emoji: "🦁", color: "#0F2A8A" },
+  { emoji: "🚀", color: "#7C3AED" },
+  { emoji: "🌊", color: "#38BDF8" },
+  { emoji: "🏰", color: "#EC4899" },
+  { emoji: "🌳", color: "#4CAF50" },
+];
 
 export default function LibraryMarketingPage() {
-  const fadeInUp = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
-  };
-
-  const staggerContainer = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1 }
-    }
-  };
-
   return (
-    <>
+    <div className="bg-[#FAF8FF] min-h-screen text-[#191b23]">
       <Navbar />
-      
-      {/* Hero Section */}
-      <header className="relative overflow-hidden pt-xl md:pt-24 pb-xl px-margin-mobile bg-surface">
-        <div className="absolute top-0 left-0 w-full h-[80%] bg-gradient-to-b from-tertiary-container/30 to-transparent -z-10"></div>
-        <div className="max-w-container-max mx-auto text-center relative z-10">
-          <motion.div initial="hidden" animate="visible" variants={fadeInUp} className="max-w-3xl mx-auto">
-            <span className="inline-block bg-tertiary-container text-on-tertiary-container px-md py-xs rounded-full font-label-caps text-label-caps mb-base shadow-sm">
-              STORY LIBRARY
-            </span>
-            <h1 className="font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface mb-md leading-tight">
-              Step Into The <span className="text-tertiary">Story</span>
-            </h1>
-            <p className="font-body-lg text-body-lg text-on-surface-variant mb-lg">
-              Immerse your child in bilingual tales. Our interactive storybooks help kids learn languages naturally through context, beautiful illustrations, and engaging narratives.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-base justify-center">
-              <Link href="/register" className="px-xl py-md bg-tertiary text-white rounded-xl font-ui-button text-ui-button shadow-lg shadow-tertiary/30 active:scale-95 transition-all flex items-center justify-center gap-xs hover:bg-tertiary/90">
-                Explore Library
-                <span className="material-symbols-outlined">auto_stories</span>
-              </Link>
-            </div>
-          </motion.div>
 
-          <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2 }} className="mt-xl max-w-5xl mx-auto relative">
-            <div className="absolute inset-0 bg-tertiary/10 blur-[100px] -z-10 rounded-full"></div>
-            <img 
-              alt="Story Library Experience" 
-              className="w-full h-auto rounded-[2rem] shadow-2xl border border-outline-variant/20" 
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAN43npM4Vix1fl_Y55h0C5dpEaYJ4Ss-PvrA0FgGRD-_HRHellvs8rnIktSlUTp_YIBYab_HVeugSFG5YoI00xQYsMp1K5yf13Znion7LzIscWKhmaupB3q-IjbnC-uW8LHqDEmkZKCIr4QX7vZdd4_5M5hfLLK1ndViR7IVZVXBOM4H-IIF93LH-XYhp7lPmcqDe8o8WhXH-x2r7G8rBULcdOKFxpdZdhZ1jokkG89HGq3FOxNNvK7v_SRQNCDe7saMbVTc5q4-9t"
-            />
-          </motion.div>
-        </div>
+      {/* Hero */}
+      <header className="relative overflow-hidden pt-12 md:pt-20 pb-16 px-6 text-center">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#EFE7FF] to-[#FAF8FF] -z-10" />
+        <Floaty className="absolute top-16 left-[10%] text-5xl hidden md:block" duration={6}>☁️</Floaty>
+        <Floaty className="absolute top-28 right-[12%] text-5xl hidden md:block" duration={5} delay={1}>✨</Floaty>
+        <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="max-w-3xl mx-auto">
+          <span className="inline-block bg-[#EDE4FF] text-[#7C3AED] px-4 py-1.5 rounded-full font-black text-xs uppercase tracking-wider mb-5">The Grand Library</span>
+          <h1 className="text-4xl md:text-6xl font-black text-[#0F2A8A] mb-5 leading-tight">
+            Step Into The <span className="text-[#7C3AED]">Story</span>
+          </h1>
+          <p className="text-lg md:text-xl text-[#0F2A8A]/70 font-semibold mb-8">
+            Immerse your child in bilingual tales. Interactive storybooks teach languages naturally through context, beautiful art, and adventure.
+          </p>
+          <ChunkyButton href="/register" variant="gold" rightIcon="auto_stories">Explore the Library</ChunkyButton>
+        </motion.div>
+
+        {/* floating bookshelf */}
+        <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2 }} className="mt-14 max-w-3xl mx-auto flex justify-center gap-4">
+          {shelfBooks.map((b, i) => (
+            <Floaty key={i} duration={4 + i * 0.4} delay={i * 0.2} distance={12}>
+              <div className="w-20 h-28 md:w-24 md:h-32 rounded-2xl flex items-center justify-center text-4xl md:text-5xl border-4 border-white shadow-xl" style={{ backgroundColor: b.color }}>{b.emoji}</div>
+            </Floaty>
+          ))}
+        </motion.div>
       </header>
 
-      {/* Features Grid */}
-      <section className="py-xl max-w-container-max mx-auto px-margin-mobile">
-        <div className="grid md:grid-cols-2 gap-xl items-center mb-xl">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}>
-            <div className="w-16 h-16 bg-surface-container-high rounded-2xl flex items-center justify-center mb-md">
-              <span className="material-symbols-outlined text-4xl text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>volume_up</span>
-            </div>
-            <h2 className="font-display-lg text-headline-md text-on-surface mb-base">Read-Along Audio</h2>
-            <p className="font-body-lg text-body-lg text-on-surface-variant mb-md">
-              Every story features professional voice narration by native speakers. Kids can listen and read along, perfect for associating spoken sounds with written words.
-            </p>
-            <ul className="space-y-3">
-              <li className="flex items-center gap-3 text-body-md"><span className="material-symbols-outlined text-tertiary">check</span> Highlighted text as it's read</li>
-              <li className="flex items-center gap-3 text-body-md"><span className="material-symbols-outlined text-tertiary">check</span> Adjustable reading speeds</li>
-              <li className="flex items-center gap-3 text-body-md"><span className="material-symbols-outlined text-tertiary">check</span> Authentic accents and pronunciations</li>
-            </ul>
-          </motion.div>
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="glass-card p-md rounded-3xl shadow-lg border border-outline-variant/10">
-            <div className="aspect-[4/3] bg-surface-container-low rounded-2xl overflow-hidden relative group cursor-pointer">
-               <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTNKSJWvjyJMIad-4jfxOaQUoxl56lkTbxyaOKA25Vz8a7_EyPV50KsSnpWEO7yaLVJCxjqGXENQ-fBKbuj815hn4phXwq9q2PGQ0v0ZIT_qgJQS1jC9dWCOp294hOMJgH3cPluAkXxxATPPyyg874EXKRmMwBQbWqO08hSBubjYK9QrWQwNmRgVQEKLzLjyM8loBZsJVytZ1zS10GCWk_WrnVaIPszWUdFbL4Qt9KUw3ceydzs0OvCJK0rQ6ZnEsptFGJYD2aYT7R" className="w-full h-full object-cover blur-[2px] group-hover:blur-0 transition-all duration-500" alt="Audio book preview" />
-               <div className="absolute inset-0 flex items-center justify-center">
-                 <div className="w-16 h-16 bg-white/90 backdrop-blur rounded-full flex items-center justify-center shadow-xl text-tertiary group-hover:scale-110 transition-transform">
-                   <span className="material-symbols-outlined text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>play_arrow</span>
-                 </div>
-               </div>
-            </div>
-          </motion.div>
+      {/* Read-along audio */}
+      <section className="max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <div className="w-16 h-16 rounded-2xl bg-[#E2F4FB] flex items-center justify-center text-4xl mb-5 border-4 border-white shadow">🔊</div>
+          <h2 className="text-3xl md:text-4xl font-black text-[#0F2A8A] mb-3">Read-Along Audio</h2>
+          <p className="text-lg text-[#0F2A8A]/70 font-semibold mb-5">
+            Every story features narration by native speakers. Kids listen and read along — perfect for linking sounds to written words.
+          </p>
+          <ul className="space-y-3">
+            {["Words highlight as they're read", "Adjustable reading speeds", "Authentic accents & pronunciation"].map((t) => (
+              <li key={t} className="flex items-center gap-3 font-bold text-[#0F2A8A]">
+                <span className="w-6 h-6 rounded-full bg-[#38BDF8] text-white flex items-center justify-center"><span className="material-symbols-outlined text-[15px]">check</span></span>
+                {t}
+              </li>
+            ))}
+          </ul>
         </div>
+        <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} className="rounded-[36px] bg-gradient-to-br from-[#38BDF8] to-[#0F2A8A] p-8 border-4 border-white shadow-[0_20px_50px_rgba(15,42,138,0.25)] aspect-[4/3] flex items-center justify-center relative">
+          <Floaty distance={14}><div className="text-[110px]">📖</div></Floaty>
+          <div className="absolute bottom-6 w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-xl text-[#0F2A8A]">
+            <span className="material-symbols-outlined text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>play_arrow</span>
+          </div>
+        </motion.div>
+      </section>
 
-        <div className="grid md:grid-cols-2 gap-xl items-center flex-row-reverse">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="order-2 md:order-1 glass-card p-lg rounded-3xl shadow-lg border border-outline-variant/10">
-            <div className="space-y-4">
-              <div className="p-4 bg-surface rounded-xl border border-outline-variant/20 shadow-sm flex items-start gap-4">
-                <span className="text-2xl mt-1">🐱</span>
-                <div>
-                  <p className="font-bold text-on-surface">El gato</p>
-                  <p className="text-sm text-on-surface-variant">The cat</p>
-                </div>
+      {/* Tap to translate */}
+      <section className="max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-2 gap-12 items-center">
+        <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="order-2 md:order-1 rounded-[36px] bg-white p-6 border-4 border-white shadow-[0_15px_40px_rgba(15,42,138,0.1)] space-y-4">
+          {wordCards.map((w, i) => (
+            <div key={w.word} className={`flex items-center gap-4 p-4 rounded-2xl bg-[#F4F6FF] ${i === 1 ? "ml-8" : ""}`}>
+              <span className="text-3xl">{w.emoji}</span>
+              <div>
+                <p className="font-black text-[#0F2A8A]">{w.word}</p>
+                <p className="text-sm font-semibold text-[#0F2A8A]/50">{w.meaning}</p>
               </div>
-              <div className="p-4 bg-surface rounded-xl border border-outline-variant/20 shadow-sm flex items-start gap-4 ml-8">
-                <span className="text-2xl mt-1">🌳</span>
-                <div>
-                  <p className="font-bold text-on-surface">El árbol</p>
-                  <p className="text-sm text-on-surface-variant">The tree</p>
-                </div>
-              </div>
-              <div className="p-4 bg-surface rounded-xl border border-outline-variant/20 shadow-sm flex items-start gap-4">
-                <span className="text-2xl mt-1">🏃‍♂️</span>
-                <div>
-                  <p className="font-bold text-on-surface">Corre</p>
-                  <p className="text-sm text-on-surface-variant">Runs</p>
-                </div>
-              </div>
+              <span className="material-symbols-outlined ml-auto text-[#F5B21B]" style={{ fontVariationSettings: "'FILL' 1" }}>volume_up</span>
             </div>
-          </motion.div>
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="order-1 md:order-2">
-            <div className="w-16 h-16 bg-surface-container-high rounded-2xl flex items-center justify-center mb-md">
-              <span className="material-symbols-outlined text-4xl text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>translate</span>
-            </div>
-            <h2 className="font-display-lg text-headline-md text-on-surface mb-base">Interactive Translation</h2>
-            <p className="font-body-lg text-body-lg text-on-surface-variant mb-md">
-              Stuck on a word? Just tap it! Our interactive stories allow kids to tap any word to instantly see its translation, hear how it's pronounced, and add it to their personal vocabulary list.
-            </p>
-          </motion.div>
+          ))}
+        </motion.div>
+        <div className="order-1 md:order-2">
+          <div className="w-16 h-16 rounded-2xl bg-[#FFF6E2] flex items-center justify-center text-4xl mb-5 border-4 border-white shadow">👆</div>
+          <h2 className="text-3xl md:text-4xl font-black text-[#0F2A8A] mb-3">Tap to Translate</h2>
+          <p className="text-lg text-[#0F2A8A]/70 font-semibold">
+            Stuck on a word? Just tap it! Kids instantly see the translation, hear it pronounced, and add it to their own word collection.
+          </p>
         </div>
       </section>
 
       <Footer />
-    </>
+    </div>
   );
 }

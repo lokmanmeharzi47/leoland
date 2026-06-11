@@ -5,94 +5,109 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
 
-export function Navbar() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const pathname = usePathname();
+const navLinks = [
+  { name: "Home", emoji: "🏠", href: "/" },
+  { name: "Games", emoji: "🎮", href: "/games" },
+  { name: "Library", emoji: "📚", href: "/library" },
+  { name: "Leo", emoji: "🦁", href: "/tutor" },
+];
 
-  const navLinks = [
-    { name: "Explorer", href: "/" },
-    { name: "Games", href: "/games" },
-    { name: "Library", href: "/library" },
-    { name: "Tutor", href: "/tutor" }
-  ];
+export function Navbar() {
+  const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname?.startsWith(href));
 
   return (
-    <nav className="bg-surface/80 backdrop-blur-md dark:bg-surface-container-highest/80 w-full top-0 sticky z-50 shadow-[0_8px_30px_rgb(37,99,235,0.08)]">
-      <div className="flex justify-between items-center px-margin-mobile md:px-lg h-20 w-full max-w-container-max mx-auto">
-        <Link href="/" className="flex items-center gap-2">
-          <img src="https://img.icons8.com/fluency/512/lion.png" alt="Lion Logo" className="w-10 h-10 object-contain drop-shadow-sm" />
-          <span className="font-display-lg text-headline-sm text-primary dark:text-inverse-primary tracking-tight font-extrabold">
-            LeoLand
-          </span>
-        </Link>
-
-        {/* Desktop Links */}
-        <div className="hidden md:flex gap-md items-center">
-          {navLinks.map((link) => {
-            const isActive = pathname === link.href || (pathname?.startsWith(link.href) && link.href !== '/');
-            return (
-              <Link 
-                key={link.name}
-                href={link.href} 
-                className={
-                  isActive
-                    ? "text-primary dark:text-inverse-primary font-bold border-b-2 border-secondary-container font-body-md text-body-md"
-                    : "text-on-surface-variant dark:text-surface-variant font-body-md text-body-md hover:text-primary transition-colors duration-200"
-                }
-              >
-                {link.name}
-              </Link>
-            );
-          })}
-        </div>
-
-        {/* Actions */}
-        <div className="flex items-center gap-base">
-          <Link href="/login" className="hidden md:flex px-md py-sm bg-primary-container text-on-primary-container rounded-xl font-ui-button text-ui-button hover:opacity-90 active:scale-95 transition-all">
-            Login
-          </Link>
-          <div className="flex gap-xs md:hidden">
-            <button 
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-base text-on-surface-variant hover:text-primary transition-colors active:scale-95 transition-transform"
+    <nav className="sticky top-0 z-50 w-full">
+      <div className="mx-auto max-w-7xl px-4 md:px-6 pt-3">
+        <div className="flex items-center justify-between gap-2 rounded-full bg-white/85 backdrop-blur-xl border-4 border-white px-3 md:px-5 h-16 shadow-[0_10px_30px_rgba(15,42,138,0.12)]">
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-2 shrink-0">
+            <motion.span
+              animate={{ rotate: [0, -10, 0, 10, 0] }}
+              transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
+              className="text-3xl leading-none"
             >
-              <span className="material-symbols-outlined">{isMobileMenuOpen ? "close" : "menu"}</span>
+              🦁
+            </motion.span>
+            <span className="text-2xl font-black text-[#0F2A8A] tracking-tight">
+              Leo<span className="text-[#F5B21B]">Land</span>
+            </span>
+          </Link>
+
+          {/* Desktop links */}
+          <div className="hidden lg:flex items-center gap-1">
+            {navLinks.map((link) => {
+              const active = isActive(link.href);
+              return (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className={`group flex items-center gap-1.5 px-3 py-2 rounded-full font-black text-sm transition-all ${
+                    active ? "bg-[#0F2A8A] text-white shadow-[0_4px_0_#0a1d61]" : "text-[#0F2A8A]/70 hover:bg-[#0F2A8A]/5 hover:text-[#0F2A8A]"
+                  }`}
+                >
+                  <span className="text-lg leading-none transition-transform group-hover:scale-125 group-hover:-rotate-6">{link.emoji}</span>
+                  {link.name}
+                </Link>
+              );
+            })}
+          </div>
+
+          {/* CTA + mobile toggle */}
+          <div className="flex items-center gap-2 shrink-0">
+            <Link
+              href="/register"
+              className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-[#F5B21B] text-[#0F2A8A] px-5 py-2.5 font-black text-sm shadow-[0_5px_0_#d97706] hover:translate-y-0.5 hover:shadow-[0_3px_0_#d97706] active:translate-y-1 active:shadow-none transition-all"
+            >
+              Start Adventure
+              <span className="material-symbols-outlined text-[18px]" style={{ fontVariationSettings: "'FILL' 1" }}>rocket_launch</span>
+            </Link>
+            <button
+              onClick={() => setOpen((o) => !o)}
+              className="lg:hidden w-11 h-11 flex items-center justify-center rounded-full bg-[#0F2A8A] text-white active:scale-95 transition-transform"
+              aria-label="Menu"
+            >
+              <span className="material-symbols-outlined">{open ? "close" : "menu"}</span>
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile menu */}
       <AnimatePresence>
-        {isMobileMenuOpen && (
+        {open && (
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="md:hidden absolute top-20 left-0 w-full bg-surface shadow-lg border-t border-outline-variant/20 p-margin-mobile flex flex-col gap-sm"
+            className="lg:hidden mx-auto max-w-7xl px-4 mt-2"
           >
-            {navLinks.map((link) => {
-              const isActive = pathname === link.href || (pathname?.startsWith(link.href) && link.href !== '/');
-              return (
-                <Link 
-                  key={link.name}
-                  href={link.href} 
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className={`p-sm rounded-lg hover:bg-surface-container-high ${
-                    isActive ? "text-primary font-bold" : "text-on-surface-variant"
-                  }`}
-                >
-                  {link.name}
-                </Link>
-              );
-            })}
-            <Link 
-              href="/login" 
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="mt-sm p-sm text-center bg-primary-container text-on-primary-container rounded-xl font-ui-button font-bold"
-            >
-              Login
-            </Link>
+            <div className="rounded-[28px] bg-white border-4 border-white shadow-[0_10px_30px_rgba(15,42,138,0.15)] p-3 grid grid-cols-2 gap-2">
+              {navLinks.map((link) => {
+                const active = isActive(link.href);
+                return (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => setOpen(false)}
+                    className={`flex items-center gap-2 px-4 py-3 rounded-2xl font-black ${
+                      active ? "bg-[#0F2A8A] text-white" : "text-[#0F2A8A]/80 bg-[#0F2A8A]/5"
+                    }`}
+                  >
+                    <span className="text-xl">{link.emoji}</span>
+                    {link.name}
+                  </Link>
+                );
+              })}
+              <Link
+                href="/register"
+                onClick={() => setOpen(false)}
+                className="col-span-2 flex items-center justify-center gap-1.5 rounded-2xl bg-[#F5B21B] text-[#0F2A8A] px-5 py-3 font-black shadow-[0_5px_0_#d97706]"
+              >
+                Start Adventure 🚀
+              </Link>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

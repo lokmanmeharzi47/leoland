@@ -16,7 +16,8 @@ const dict = {
   en: {
     "shell.tagline": "Let's learn!",
     "nav.home": "Home",
-    "nav.stories": "Stories",
+    "nav.library": "Library",
+    "nav.rapport": "Progress",
     "nav.games": "Games",
     "nav.words": "Words",
     "nav.tutor": "Leo",
@@ -47,7 +48,8 @@ const dict = {
   fr: {
     "shell.tagline": "Apprenons !",
     "nav.home": "Accueil",
-    "nav.stories": "Histoires",
+    "nav.library": "Bibliothèque",
+    "nav.rapport": "Progrès",
     "nav.games": "Jeux",
     "nav.words": "Mots",
     "nav.tutor": "Leo",
@@ -78,7 +80,8 @@ const dict = {
   ar: {
     "shell.tagline": "هيا نتعلّم!",
     "nav.home": "الرئيسية",
-    "nav.stories": "القصص",
+    "nav.library": "المكتبة",
+    "nav.rapport": "التقدم",
     "nav.games": "الألعاب",
     "nav.words": "الكلمات",
     "nav.tutor": "ليو",

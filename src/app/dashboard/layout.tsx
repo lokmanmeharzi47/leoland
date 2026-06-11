@@ -7,11 +7,11 @@ import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
 const navItems: { href: string; icon: string; label: TKey }[] = [
   { href: "/dashboard", icon: "home", label: "nav.home" },
-  { href: "/dashboard/stories", icon: "auto_stories", label: "nav.stories" },
   { href: "/dashboard/games", icon: "sports_esports", label: "nav.games" },
-  { href: "/dashboard/words", icon: "style", label: "nav.words" },
+  { href: "/dashboard/stories", icon: "auto_stories", label: "nav.library" },
   { href: "/dashboard/tutor", icon: "pets", label: "nav.tutor" },
   { href: "/dashboard/achievements", icon: "emoji_events", label: "nav.rewards" },
+  { href: "/dashboard/rapport", icon: "insights", label: "nav.rapport" },
 ];
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
