@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import confetti from "canvas-confetti";
 import { ChunkyButton, Floaty } from "@/components/leo/ui";
+import { signUp } from "@/app/actions/auth";
 
 const ages = ["5–6", "7–8", "9–10", "11–12"];
 const languages = [
@@ -26,7 +27,7 @@ const levels = [
   { name: "Pro", emoji: "⭐", desc: "Ready for a challenge" },
 ];
 
-const steps = ["Your Explorer", "Languages", "Favorite Worlds", "Skill Level", "Parent Account"];
+const steps = ["Your Explorer", "Languages", "Favorite Worlds", "Skill Level", "Account Setup"];
 
 export default function RegisterPage() {
   const [step, setStep] = useState(0);
@@ -36,18 +37,46 @@ export default function RegisterPage() {
   const [picks, setPicks] = useState<string[]>([]);
   const [level, setLevel] = useState<string | null>(null);
   const [done, setDone] = useState(false);
+  
+  // Auth state
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [role, setRole] = useState<"admin" | "student">("student");
+  const [error, setError] = useState<string | null>(null);
+  const [isPending, startTransition] = useTransition();
 
   const toggle = (arr: string[], set: (v: string[]) => void, v: string) =>
     set(arr.includes(v) ? arr.filter((x) => x !== v) : [...arr, v]);
 
-  const canNext = [name.trim() && age, langs.length > 0, picks.length > 0, level, true][step];
+  const canNext = [
+    name.trim() && age, 
+    langs.length > 0, 
+    picks.length > 0, 
+    level, 
+    fullName.trim() && email.trim() && password.length >= 6
+  ][step];
 
   const next = () => {
     if (step < steps.length - 1) {
       setStep((s) => s + 1);
     } else {
-      setDone(true);
-      confetti({ particleCount: 200, spread: 90, origin: { y: 0.6 }, colors: ["#F5B21B", "#0F2A8A", "#ffffff", "#4CAF50", "#38BDF8"] });
+      setError(null);
+      startTransition(async () => {
+        const formData = new FormData();
+        formData.append("email", email);
+        formData.append("password", password);
+        formData.append("fullName", fullName);
+        formData.append("role", role);
+
+        const res = await signUp(formData);
+        if (res?.error) {
+          setError(res.error);
+        } else {
+          setDone(true);
+          confetti({ particleCount: 200, spread: 90, origin: { y: 0.6 }, colors: ["#F5B21B", "#0F2A8A", "#ffffff", "#4CAF50", "#38BDF8"] });
+        }
+      });
     }
   };
 
@@ -176,13 +205,24 @@ export default function RegisterPage() {
                 {step === 4 && (
                   <div>
                     <h2 className="text-2xl font-black text-[#0F2A8A] mb-1">Almost there!</h2>
-                    <p className="text-[#0F2A8A]/60 font-semibold mb-5">Create a parent account to save the journey.</p>
-                    <div className="space-y-3">
-                      <input placeholder="Parent's full name" className="w-full px-5 py-3.5 bg-[#F4F6FF] border-2 border-transparent rounded-2xl font-bold text-[#0F2A8A] placeholder-[#0F2A8A]/30 focus:outline-none focus:border-[#F5B21B] focus:bg-white transition-all" />
-                      <input type="email" placeholder="Email address" className="w-full px-5 py-3.5 bg-[#F4F6FF] border-2 border-transparent rounded-2xl font-bold text-[#0F2A8A] placeholder-[#0F2A8A]/30 focus:outline-none focus:border-[#F5B21B] focus:bg-white transition-all" />
-                      <input type="password" placeholder="Create a password" className="w-full px-5 py-3.5 bg-[#F4F6FF] border-2 border-transparent rounded-2xl font-bold text-[#0F2A8A] placeholder-[#0F2A8A]/30 focus:outline-none focus:border-[#F5B21B] focus:bg-white transition-all" />
+                    <p className="text-[#0F2A8A]/60 font-semibold mb-5">Create an account to save the journey.</p>
+                    
+                    <div className="flex gap-2 mb-4">
+                      <Choice active={role === "student"} onClick={() => setRole("student")} row>
+                         <span className="font-black text-sm text-[#0F2A8A]">Student</span>
+                      </Choice>
+                      <Choice active={role === "admin"} onClick={() => setRole("admin")} row>
+                         <span className="font-black text-sm text-[#0F2A8A]">Admin</span>
+                      </Choice>
                     </div>
-                    <p className="text-[11px] text-[#0F2A8A]/50 font-semibold mt-3">
+
+                    <div className="space-y-3">
+                      <input value={fullName} onChange={(e) => setFullName(e.target.value)} placeholder="Full name" className="w-full px-5 py-3.5 bg-[#F4F6FF] border-2 border-transparent rounded-2xl font-bold text-[#0F2A8A] placeholder-[#0F2A8A]/30 focus:outline-none focus:border-[#F5B21B] focus:bg-white transition-all" />
+                      <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email address" className="w-full px-5 py-3.5 bg-[#F4F6FF] border-2 border-transparent rounded-2xl font-bold text-[#0F2A8A] placeholder-[#0F2A8A]/30 focus:outline-none focus:border-[#F5B21B] focus:bg-white transition-all" />
+                      <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Create a password (min 6 chars)" className="w-full px-5 py-3.5 bg-[#F4F6FF] border-2 border-transparent rounded-2xl font-bold text-[#0F2A8A] placeholder-[#0F2A8A]/30 focus:outline-none focus:border-[#F5B21B] focus:bg-white transition-all" />
+                    </div>
+                    {error && <p className="text-red-500 text-sm mt-3 font-bold text-center">{error}</p>}
+                    <p className="text-[11px] text-[#0F2A8A]/50 font-semibold mt-4">
                       By joining you agree to our <Link href="#" className="underline">Terms</Link> & <Link href="#" className="underline">Privacy Policy</Link>.
                     </p>
                   </div>
@@ -201,8 +241,8 @@ export default function RegisterPage() {
                   Have an account?
                 </Link>
               )}
-              <ChunkyButton variant={canNext ? "gold" : "white"} onClick={canNext ? next : undefined} rightIcon={step === steps.length - 1 ? "celebration" : "arrow_forward"}>
-                {step === steps.length - 1 ? "Create Journey" : "Next"}
+              <ChunkyButton variant={canNext && !isPending ? "gold" : "white"} onClick={canNext && !isPending ? next : undefined} rightIcon={step === steps.length - 1 ? "celebration" : "arrow_forward"}>
+                {isPending ? "Creating..." : step === steps.length - 1 ? "Create Journey" : "Next"}
               </ChunkyButton>
             </div>
           </motion.div>

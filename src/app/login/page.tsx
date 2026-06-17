@@ -1,10 +1,36 @@
 "use client";
 
 import Link from "next/link";
+import { useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { ChunkyButton, Floaty } from "@/components/leo/ui";
+import { signIn } from "@/app/actions/auth";
 
 export default function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [isPending, startTransition] = useTransition();
+  const router = useRouter();
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    startTransition(async () => {
+      const formData = new FormData();
+      formData.append("email", email);
+      formData.append("password", password);
+      
+      const res = await signIn(formData);
+      if (res?.error) {
+        setError(res.error);
+      } else {
+        router.push("/dashboard");
+      }
+    });
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#87CEEB] via-[#bfe6f5] to-[#FAF8FF] flex flex-col lg:flex-row relative">
       {/* Background magical elements */}
@@ -60,25 +86,31 @@ export default function LoginPage() {
             <p className="text-[#0F2A8A]/60 font-medium mt-2 text-lg">Ready for another adventure?</p>
           </div>
 
-          <form className="flex flex-col gap-5">
+          <form onSubmit={handleLogin} className="flex flex-col gap-5">
             <Field 
               icon="mail" 
               label="Email Address" 
               type="email" 
-              placeholder="parent@example.com" 
+              placeholder="student@example.com" 
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <Field 
               icon="lock" 
               label="Password" 
               type="password" 
               placeholder="••••••••" 
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               extra={<Link href="#" className="text-sm font-bold text-[#F5B21B] hover:text-orange-500 hover:underline transition-colors">Forgot?</Link>} 
             />
             
+            {error && <p className="text-red-500 text-sm font-bold text-center">{error}</p>}
+
             <div className="mt-4">
-              <button type="button" className="w-full py-4 bg-gradient-to-r from-[#0F2A8A] to-[#1e3fb8] text-white rounded-2xl font-bold text-lg shadow-[0_8px_20px_rgba(15,42,138,0.3)] hover:shadow-[0_10px_25px_rgba(15,42,138,0.4)] hover:-translate-y-1 active:translate-y-0 active:shadow-md transition-all flex items-center justify-center gap-2">
-                Sign In
-                <span className="material-symbols-outlined font-bold">arrow_forward</span>
+              <button type="submit" disabled={isPending} className="w-full py-4 bg-gradient-to-r from-[#0F2A8A] to-[#1e3fb8] text-white rounded-2xl font-bold text-lg shadow-[0_8px_20px_rgba(15,42,138,0.3)] hover:shadow-[0_10px_25px_rgba(15,42,138,0.4)] hover:-translate-y-1 active:translate-y-0 active:shadow-md transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:hover:-translate-y-0 disabled:cursor-not-allowed">
+                {isPending ? "Signing In..." : "Sign In"}
+                {!isPending && <span className="material-symbols-outlined font-bold">arrow_forward</span>}
               </button>
             </div>
           </form>
@@ -109,7 +141,7 @@ export default function LoginPage() {
   );
 }
 
-function Field({ icon, label, type, placeholder, extra }: { icon: string; label: string; type: string; placeholder: string; extra?: React.ReactNode }) {
+function Field({ icon, label, type, placeholder, value, onChange, extra }: { icon: string; label: string; type: string; placeholder: string; value: string; onChange: (e: any) => void; extra?: React.ReactNode }) {
   return (
     <div className="flex flex-col">
       <div className="flex items-center justify-between mb-2 px-1">
@@ -123,6 +155,8 @@ function Field({ icon, label, type, placeholder, extra }: { icon: string; label:
         <input
           type={type}
           placeholder={placeholder}
+          value={value}
+          onChange={onChange}
           className="w-full pl-12 pr-4 py-4 bg-[#F8FAFF] border-2 border-[#E8EEFF] rounded-2xl font-bold text-[#0F2A8A] placeholder-[#0F2A8A]/30 focus:outline-none focus:border-[#0F2A8A] focus:bg-white focus:shadow-[0_0_0_4px_rgba(15,42,138,0.1)] transition-all"
         />
       </div>

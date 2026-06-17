@@ -27,36 +27,41 @@ export default function LandingPage() {
       <Navbar />
 
       {/* HERO SECTION */}
-      <section className="relative w-full min-h-[90vh] flex items-center justify-center pt-24 pb-16 px-6 overflow-hidden">
-        {/* Cinematic Background */}
-        <div className="absolute inset-0 z-0">
+      <section className="relative w-full lg:min-h-[90vh] flex flex-col lg:block items-center justify-center pt-24 pb-16 overflow-hidden">
+        {/* Cinematic Background (Desktop) */}
+        <div className="absolute inset-0 z-0 hidden lg:block">
           <img src="/hero_bg.png" alt="LeoLand Magical World" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-b from-[#0F2A8A]/40 via-transparent to-[#FAF8FF]"></div>
         </div>
 
-        {/* Floating Elements */}
-        <motion.img animate={floatAnimation} src="https://cdn-icons-png.flaticon.com/512/3063/3063822.png" className="absolute top-32 left-20 w-24 opacity-80 z-10 drop-shadow-2xl" alt="Cloud" />
-        <motion.img animate={{ y: [0, -30, 0], transition: { duration: 5, repeat: Infinity, ease: "easeInOut" as const } }} src="https://cdn-icons-png.flaticon.com/512/2854/2854341.png" className="absolute top-40 right-24 w-32 opacity-90 z-10 drop-shadow-2xl" alt="Hot Air Balloon" />
+        {/* Mobile Image (Shown completely) */}
+        <div className="w-full block lg:hidden relative z-0 mb-[-2rem]">
+          <img src="/hero_bg.png" alt="LeoLand Magical World" className="w-full h-auto object-contain drop-shadow-xl" />
+        </div>
 
-        <div className="relative z-20 max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-12 items-center">
-          <motion.div initial="hidden" animate="visible" variants={fadeInUp} className="bg-white/80 backdrop-blur-xl p-10 rounded-[40px] border-4 border-white shadow-2xl">
-            <div className="inline-flex items-center gap-2 bg-[#F5B21B]/20 text-[#d97706] px-4 py-2 rounded-full font-bold text-sm mb-6 uppercase tracking-wider">
+        {/* Floating Elements */}
+        <motion.img animate={floatAnimation} src="https://cdn-icons-png.flaticon.com/512/3063/3063822.png" className="absolute top-32 left-20 w-24 opacity-80 z-10 drop-shadow-2xl hidden lg:block" alt="Cloud" />
+        <motion.img animate={{ y: [0, -30, 0], transition: { duration: 5, repeat: Infinity, ease: "easeInOut" as const } }} src="https://cdn-icons-png.flaticon.com/512/2854/2854341.png" className="absolute top-40 right-24 w-32 opacity-90 z-10 drop-shadow-2xl hidden lg:block" alt="Hot Air Balloon" />
+
+        <div className="relative z-20 max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-12 items-center px-6 lg:px-0">
+          <motion.div initial="hidden" animate="visible" variants={fadeInUp} className="bg-white/95 md:bg-white/80 backdrop-blur-xl p-6 md:p-10 rounded-[40px] border-4 border-white shadow-2xl">
+            <div className="inline-flex items-center gap-2 bg-[#F5B21B]/20 text-[#d97706] px-4 py-2 rounded-full font-bold text-sm mb-4 md:mb-6 uppercase tracking-wider">
               <span className="material-symbols-outlined text-[18px]">auto_awesome</span>
               Parent Approved
             </div>
-            <h1 className="text-5xl md:text-6xl font-extrabold text-[#0F2A8A] leading-tight mb-6 drop-shadow-sm">
+            <h1 className="text-4xl md:text-6xl font-extrabold text-[#0F2A8A] leading-tight mb-4 md:mb-6 drop-shadow-sm">
               Learn Languages Through <span className="text-[#F5B21B] drop-shadow-md">Adventure</span>
             </h1>
-            <p className="text-xl text-[#434655] mb-8 font-medium">
+            <p className="text-lg md:text-xl text-[#434655] mb-6 md:mb-8 font-medium">
               Arabic, French and English become exciting adventures with Leo and his friends.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 mb-8">
-              <button className="px-8 py-4 bg-[#F5B21B] text-[#0F2A8A] rounded-full font-bold text-lg shadow-[0_8px_0_#d97706] hover:translate-y-1 hover:shadow-[0_4px_0_#d97706] active:translate-y-2 active:shadow-none transition-all flex items-center justify-center gap-2">
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 mb-6 md:mb-8">
+              <button className="px-8 py-3 md:py-4 bg-[#F5B21B] text-[#0F2A8A] rounded-full font-bold text-lg shadow-[0_8px_0_#d97706] hover:translate-y-1 hover:shadow-[0_4px_0_#d97706] active:translate-y-2 active:shadow-none transition-all flex items-center justify-center gap-2">
                 Start Learning
                 <span className="material-symbols-outlined">rocket_launch</span>
               </button>
-              <button className="px-8 py-4 bg-white text-[#0F2A8A] border-2 border-[#0F2A8A]/10 rounded-full font-bold text-lg hover:bg-[#0F2A8A]/5 transition-all flex items-center justify-center">
+              <button className="px-8 py-3 md:py-4 bg-white/80 md:bg-white text-[#0F2A8A] border-2 border-[#0F2A8A]/10 rounded-full font-bold text-lg hover:bg-[#0F2A8A]/5 transition-all flex items-center justify-center">
                 Explore Worlds
               </button>
             </div>
@@ -311,8 +316,8 @@ export default function LandingPage() {
 
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {[
-              { parent: "Sarah M.", child: "Leo (6)", text: "My son used to hate learning French. Now he wakes up asking to 'play with Leo'. His accent is better than mine now!", before: "0 French words", after: "Holds basic conversations" },
-              { parent: "Ahmed K.", child: "Zainab (8)", text: "The Arabic stories are beautiful. She doesn't even realize she's studying grammar because she's so invested in saving the Vocabulary Forest.", before: "Struggled with reading", after: "Reads stories independently" }
+              { parent: "Ms. Sarah", child: "Leo's Class (1st Grade)", text: "My students used to hate learning French. Now they wake up asking to 'play with Leo'. Their accents are incredible!", before: "0 French words", after: "Holds basic conversations" },
+              { parent: "Mr. Ahmed", child: "Zainab (3rd Grade)", text: "The Arabic stories are beautiful. She doesn't even realize she's studying grammar because she's so invested in saving the Vocabulary Forest.", before: "Struggled with reading", after: "Reads stories independently" }
             ].map((story, idx) => (
               <motion.div key={idx} variants={fadeInUp} className="bg-white rounded-[40px] p-8 shadow-xl border-2 border-transparent hover:border-[#0F2A8A]/10 transition-colors">
                 <div className="flex items-center gap-4 mb-6">
@@ -322,7 +327,7 @@ export default function LandingPage() {
                   </div>
                   <div>
                     <h4 className="font-bold text-lg text-[#0F2A8A]">{story.parent}</h4>
-                    <p className="text-sm font-semibold text-gray-500">Parent of {story.child}</p>
+                    <p className="text-sm font-semibold text-gray-500">Teacher of {story.child}</p>
                   </div>
                 </div>
                 <p className="text-lg font-medium text-[#434655] italic mb-8">"{story.text}"</p>

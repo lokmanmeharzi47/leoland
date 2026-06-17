@@ -2,7 +2,6 @@ import Link from "next/link";
 
 const columns = [
   { title: "Worlds", links: ["Vocabulary Forest", "Grammar Castle", "Speaking Ocean", "Games"] },
-  { title: "Parents", links: ["Parent Dashboard", "How It Works", "Pricing & Plans", "Safety & Privacy"] },
 ];
 
 export function Footer() {
@@ -48,7 +47,6 @@ export function Footer() {
           <div className="flex gap-6">
             <Link href="#" className="hover:text-white">Terms of Adventure</Link>
             <Link href="#" className="hover:text-white">Privacy</Link>
-            <Link href="#" className="hover:text-white">Parent Guide</Link>
           </div>
         </div>
       </div>

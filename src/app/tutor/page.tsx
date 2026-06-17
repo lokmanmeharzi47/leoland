@@ -28,7 +28,7 @@ export default function TutorMarketingPage() {
             <p className="text-lg md:text-xl text-[#0F2A8A]/70 font-semibold mb-8 max-w-xl">
               Speaking takes practice. With Leo, kids hold real conversations out loud in a safe, cheerful, judgment-free corner — any time they like.
             </p>
-            <ChunkyButton href="/dashboard/tutor" variant="gold" rightIcon="pets">Talk with Leo</ChunkyButton>
+            <ChunkyButton href="/student/dashboard/tutor" variant="gold" rightIcon="pets">Talk with Leo</ChunkyButton>
           </motion.div>
 
           {/* Magical scene: Leo + children + speech bubbles */}

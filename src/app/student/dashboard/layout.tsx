@@ -4,28 +4,29 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useLanguage, type TKey } from "@/lib/i18n";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { signOut } from "@/app/actions/auth";
 
 const navItems: { href: string; icon: string; label: TKey }[] = [
-  { href: "/dashboard", icon: "home", label: "nav.home" },
-  { href: "/dashboard/games", icon: "sports_esports", label: "nav.games" },
-  { href: "/dashboard/stories", icon: "auto_stories", label: "nav.library" },
-  { href: "/dashboard/tutor", icon: "pets", label: "nav.tutor" },
-  { href: "/dashboard/achievements", icon: "emoji_events", label: "nav.rewards" },
-  { href: "/dashboard/rapport", icon: "insights", label: "nav.rapport" },
+  { href: "/student/dashboard", icon: "home", label: "nav.home" },
+  { href: "/student/dashboard/games", icon: "sports_esports", label: "nav.games" },
+  { href: "/student/dashboard/stories", icon: "auto_stories", label: "nav.library" },
+  { href: "/student/dashboard/tutor", icon: "pets", label: "nav.tutor" },
+  { href: "/student/dashboard/achievements", icon: "emoji_events", label: "nav.rewards" },
+  { href: "/student/dashboard/rapport", icon: "insights", label: "nav.rapport" },
 ];
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const { t } = useLanguage();
   const isActive = (href: string) =>
-    href === "/dashboard" ? pathname === href : pathname.startsWith(href);
+    href === "/student/dashboard" ? pathname === href : pathname.startsWith(href);
 
   return (
     <div className="bg-background min-h-screen flex flex-col text-on-background">
       {/* Top bar */}
       <header className="sticky top-0 z-30 bg-surface/85 backdrop-blur-md h-18 w-full border-b border-outline-variant/10">
         <div className="max-w-container-max mx-auto h-full flex items-center justify-between px-margin-mobile md:px-lg py-3">
-          <Link href="/dashboard" className="flex items-center gap-2">
+          <Link href="/student/dashboard" className="flex items-center gap-2">
             <span className="material-symbols-outlined text-secondary text-[32px]" style={{ fontVariationSettings: "'FILL' 1" }}>
               pets
             </span>
@@ -39,6 +40,15 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               <span>1,240</span>
             </div>
             <LanguageSwitcher />
+            <form action={signOut}>
+              <button 
+                type="submit" 
+                className="flex items-center justify-center w-10 h-10 rounded-full bg-error/10 text-error hover:bg-error/20 transition-colors"
+                title="Sign Out"
+              >
+                <span className="material-symbols-outlined text-[20px]">logout</span>
+              </button>
+            </form>
           </div>
         </div>
       </header>

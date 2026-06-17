@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import { signOut } from "@/app/actions/auth";
 
 export default function AdminLayoutClient({
   children,
@@ -47,12 +48,14 @@ export default function AdminLayoutClient({
 
   const menuItems = [
     { href: "/admin", label: "Dashboard", icon: "dashboard" },
-    { href: "/admin/courses", label: "Course Builder", icon: "menu_book" },
-    { href: "/admin/learning-paths", label: "Learning Paths", icon: "route" },
-    { href: "/admin/users", label: "Users", icon: "group" },
-    { href: "/admin/ai", label: "AI Content", icon: "psychology" },
-    { href: "/admin/rewards", label: "Rewards", icon: "monetization_on" },
-    { href: "/admin/lesson-builder", label: "Lesson Builder", icon: "edit_note" },
+    { href: "/admin/games", label: "Games", icon: "sports_esports" },
+    { href: "/admin/stories", label: "Stories", icon: "menu_book" },
+    { href: "/admin/learning-worlds", label: "Learning Worlds", icon: "public" },
+    { href: "/admin/assignments", label: "Assignments", icon: "assignment" },
+    { href: "/admin/students", label: "Students", icon: "school" },
+    { href: "/admin/teachers", label: "Teachers", icon: "person_4" },
+    { href: "/admin/ai", label: "AI Tutor", icon: "smart_toy" },
+    { href: "/admin/analytics", label: "Analytics", icon: "bar_chart" },
   ];
 
   return (
@@ -114,30 +117,22 @@ export default function AdminLayoutClient({
           
           <div className="h-px bg-outline-variant/20 my-4" />
           
-          <Link
-            href="/dashboard"
-            className="flex items-center gap-3 px-4 py-3 text-on-surface-variant font-medium hover:bg-surface-container-highest hover:text-on-surface transition-all duration-200 hover:translate-x-1"
-          >
-            <span className="material-symbols-outlined">exit_to_app</span>
-            <span className="font-body-md">Back to App</span>
-          </Link>
         </nav>
 
         <div className="px-6 mt-auto">
-          <button className="w-full py-3 bg-secondary text-white dark:text-zinc-950 font-bold rounded-xl flex items-center justify-center gap-2 mb-6 hover:scale-102 hover:shadow-lg hover:shadow-secondary/20 transition-all shadow-md active:scale-98">
-            <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>upgrade</span>
-            Level Up System
-          </button>
+         
           
           <div className="space-y-1 border-t border-outline-variant/30 pt-4">
             <a className="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:text-primary dark:hover:text-blue-400 transition-colors" href="#">
               <span className="material-symbols-outlined text-[20px]">help</span>
               <span className="font-label-caps text-xs">Support</span>
             </a>
-            <Link className="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:text-error transition-colors" href="/login">
-              <span className="material-symbols-outlined text-[20px]">logout</span>
-              <span className="font-label-caps text-xs">Sign Out</span>
-            </Link>
+            <form action={signOut}>
+              <button type="submit" className="w-full flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:text-error transition-colors text-left">
+                <span className="material-symbols-outlined text-[20px]">logout</span>
+                <span className="font-label-caps text-xs">Sign Out</span>
+              </button>
+            </form>
           </div>
         </div>
       </aside>
@@ -178,11 +173,11 @@ export default function AdminLayoutClient({
               </Link>
               <Link
                 className={`py-5 text-body-sm font-semibold border-b-2 transition-colors ${
-                  pathname.startsWith("/admin/courses")
+                  pathname.startsWith("/admin/analytics")
                     ? "text-primary dark:text-blue-400 border-primary dark:border-blue-400"
                     : "text-on-surface-variant border-transparent hover:text-primary dark:hover:text-blue-400"
                 }`}
-                href="/admin/courses"
+                href="/admin/analytics"
               >
                 Analytics
               </Link>

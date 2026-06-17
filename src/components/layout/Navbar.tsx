@@ -18,7 +18,7 @@ export function Navbar() {
   const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname?.startsWith(href));
 
   return (
-    <nav className="sticky top-0 z-50 w-full">
+    <nav className="fixed top-0 left-0 right-0 z-50 w-full">
       <div className="mx-auto max-w-7xl px-4 md:px-6 pt-3">
         <div className="flex items-center justify-between gap-2 rounded-full bg-white/85 backdrop-blur-xl border-4 border-white px-3 md:px-5 h-16 shadow-[0_10px_30px_rgba(15,42,138,0.12)]">
           {/* Logo */}
