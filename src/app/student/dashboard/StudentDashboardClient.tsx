@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Link from "next/link";
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 
@@ -19,240 +18,198 @@ export default function StudentDashboardClient({ initialData }: { initialData: a
   const firstName = (student?.full_name || student?.username || "Explorer").split(" ")[0];
 
   return (
-    <div className="space-y-8 lg:space-y-12 w-full">
+    <div className="w-full max-w-7xl mx-auto space-y-6">
+      
       {/* Hero Section */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-3xl md:text-5xl font-black text-[#0F2A8A]">Hi, {firstName}! 👋</h1>
-          <p className="text-[#0F2A8A]/60 font-bold mt-2 text-lg">Ready for another adventure today?</p>
+          <h1 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">
+            Welcome back, {firstName}! 👋
+          </h1>
+          <p className="text-slate-500 dark:text-zinc-400 mt-1">Here is what's happening with your learning progress today.</p>
         </div>
       </div>
 
-      {/* Top Stats Grid */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <motion.div whileHover={{ y: -4 }} className="bg-white rounded-3xl p-5 border border-[#0F2A8A]/5 shadow-[0_4px_20px_rgba(15,42,138,0.05)] relative overflow-hidden">
-          <div className="absolute -right-4 -bottom-4 opacity-10">
-            <span className="material-symbols-outlined text-[100px]">star</span>
-          </div>
-          <p className="text-[#0F2A8A]/60 font-black text-xs uppercase tracking-wider mb-2 relative z-10">Total XP</p>
-          <p className="text-3xl font-black text-[#0F2A8A] relative z-10">{student.total_xp || 0}</p>
-        </motion.div>
-
-        <motion.div whileHover={{ y: -4 }} className="bg-white rounded-3xl p-5 border border-[#0F2A8A]/5 shadow-[0_4px_20px_rgba(15,42,138,0.05)] relative overflow-hidden">
-          <div className="absolute -right-4 -bottom-4 opacity-10">
-            <span className="material-symbols-outlined text-[100px]">military_tech</span>
-          </div>
-          <p className="text-[#0F2A8A]/60 font-black text-xs uppercase tracking-wider mb-2 relative z-10">Badges Earned</p>
-          <p className="text-3xl font-black text-[#0F2A8A] relative z-10">{badges?.length || 0}</p>
-        </motion.div>
-
-        <motion.div whileHover={{ y: -4 }} className="bg-white rounded-3xl p-5 border border-[#0F2A8A]/5 shadow-[0_4px_20px_rgba(15,42,138,0.05)] relative overflow-hidden">
-          <div className="absolute -right-4 -bottom-4 opacity-10">
-            <span className="material-symbols-outlined text-[100px]">menu_book</span>
-          </div>
-          <p className="text-[#0F2A8A]/60 font-black text-xs uppercase tracking-wider mb-2 relative z-10">Words Learned</p>
-          <p className="text-3xl font-black text-[#0F2A8A] relative z-10">{wordsCount}</p>
-        </motion.div>
-
-        <motion.div whileHover={{ y: -4 }} className="bg-white rounded-3xl p-5 border border-[#0F2A8A]/5 shadow-[0_4px_20px_rgba(15,42,138,0.05)] relative overflow-hidden">
-          <div className="absolute -right-4 -bottom-4 opacity-10">
-            <span className="material-symbols-outlined text-[100px] text-orange-500">local_fire_department</span>
-          </div>
-          <p className="text-[#0F2A8A]/60 font-black text-xs uppercase tracking-wider mb-2 relative z-10">Day Streak</p>
-          <p className="text-3xl font-black text-orange-500 relative z-10 flex items-center gap-2">
-            {student.streak || 0}
-            <span className="material-symbols-outlined text-orange-500 text-[28px]">local_fire_department</span>
-          </p>
-        </motion.div>
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      {/* Bento Box Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         
-        {/* Main Column */}
-        <div className="lg:col-span-2 space-y-8">
-          
-          {/* Keep Learning Section */}
-          <section>
-            <h2 className="text-2xl font-black text-[#0F2A8A] mb-4 flex items-center gap-2">
-              <span className="material-symbols-outlined text-emerald-500 text-[28px]">play_circle</span>
-              Continue Learning
-            </h2>
-            <div className="bg-gradient-to-br from-[#0F2A8A] to-[#1e3fb8] rounded-[32px] p-8 text-white shadow-[0_15px_40px_rgba(15,42,138,0.25)] relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/4"></div>
+        {/* Stat: Total XP */}
+        <div className="bg-white dark:bg-zinc-900 rounded-2xl p-6 border border-slate-200 dark:border-zinc-800 shadow-sm flex flex-col justify-center">
+          <div className="flex items-center gap-3 mb-2">
+            <span className="material-symbols-outlined text-blue-500 bg-blue-50 dark:bg-blue-500/10 p-2 rounded-lg">star</span>
+            <p className="text-slate-500 dark:text-zinc-400 font-semibold text-sm">Total XP</p>
+          </div>
+          <p className="text-3xl font-bold text-slate-900 dark:text-white">{student.total_xp || 0}</p>
+        </div>
+
+        {/* Stat: Badges */}
+        <div className="bg-white dark:bg-zinc-900 rounded-2xl p-6 border border-slate-200 dark:border-zinc-800 shadow-sm flex flex-col justify-center">
+          <div className="flex items-center gap-3 mb-2">
+            <span className="material-symbols-outlined text-indigo-500 bg-indigo-50 dark:bg-indigo-500/10 p-2 rounded-lg">military_tech</span>
+            <p className="text-slate-500 dark:text-zinc-400 font-semibold text-sm">Badges</p>
+          </div>
+          <p className="text-3xl font-bold text-slate-900 dark:text-white">{badges?.length || 0}</p>
+        </div>
+
+        {/* Stat: Words */}
+        <div className="bg-white dark:bg-zinc-900 rounded-2xl p-6 border border-slate-200 dark:border-zinc-800 shadow-sm flex flex-col justify-center">
+          <div className="flex items-center gap-3 mb-2">
+            <span className="material-symbols-outlined text-emerald-500 bg-emerald-50 dark:bg-emerald-500/10 p-2 rounded-lg">menu_book</span>
+            <p className="text-slate-500 dark:text-zinc-400 font-semibold text-sm">Words Learned</p>
+          </div>
+          <p className="text-3xl font-bold text-slate-900 dark:text-white">{wordsCount}</p>
+        </div>
+
+        {/* Stat: Streak */}
+        <div className="bg-white dark:bg-zinc-900 rounded-2xl p-6 border border-slate-200 dark:border-zinc-800 shadow-sm flex flex-col justify-center">
+          <div className="flex items-center gap-3 mb-2">
+            <span className="material-symbols-outlined text-orange-500 bg-orange-50 dark:bg-orange-500/10 p-2 rounded-lg">local_fire_department</span>
+            <p className="text-slate-500 dark:text-zinc-400 font-semibold text-sm">Day Streak</p>
+          </div>
+          <p className="text-3xl font-bold text-slate-900 dark:text-white">{student.streak || 0}</p>
+        </div>
+
+        {/* Continue Learning (Span 2) */}
+        <div className="lg:col-span-2 bg-blue-600 dark:bg-blue-700 rounded-2xl p-8 text-white shadow-sm flex flex-col justify-between relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl transform translate-x-1/3 -translate-y-1/3"></div>
+          {latestProgress ? (
+            <div className="relative z-10">
+              <h2 className="text-sm font-bold text-blue-200 uppercase tracking-wider mb-2">Up Next</h2>
+              <h3 className="text-2xl font-bold mb-1">{latestProgress.worlds?.title}</h3>
+              <p className="text-blue-100 mb-6">Lesson: {latestProgress.lessons?.title}</p>
               
-              {latestProgress ? (
-                <>
-                  <div className="relative z-10">
-                    <span className="bg-emerald-500 text-white px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider mb-4 inline-block shadow-sm">Up Next</span>
-                    <h3 className="text-3xl font-black mb-2">{latestProgress.worlds?.title}</h3>
-                    <p className="text-white/80 font-bold mb-6 text-lg">Lesson: {latestProgress.lessons?.title}</p>
-                    
-                    <div className="mb-8">
-                      <div className="flex justify-between text-sm font-bold mb-2">
-                         <span>Progress</span>
-                         <span>{latestProgress.progress_percentage}% Complete</span>
-                      </div>
-                      <div className="w-full h-4 bg-black/20 rounded-full overflow-hidden shadow-inner">
-                         <div className="h-full bg-[#F5B21B] rounded-full" style={{ width: `${latestProgress.progress_percentage}%` }}></div>
-                      </div>
+              <div className="mb-6">
+                <div className="flex justify-between text-sm font-medium mb-2 text-blue-100">
+                   <span>Progress</span>
+                   <span>{latestProgress.progress_percentage}% Complete</span>
+                </div>
+                <div className="w-full h-2 bg-black/20 rounded-full overflow-hidden">
+                   <div 
+                     className="h-full bg-white rounded-full" 
+                     style={{ width: `${latestProgress.progress_percentage}%` }}
+                   />
+                </div>
+              </div>
+
+              <Link href={`/student/worlds/${latestProgress.worlds?.id}/lesson/${latestProgress.lessons?.id}`} className="inline-block bg-white text-blue-600 px-6 py-2.5 rounded-lg font-bold hover:bg-slate-50 transition-colors">
+                 Resume Lesson
+              </Link>
+            </div>
+          ) : (
+            <div className="relative z-10 flex flex-col h-full justify-center">
+               <h3 className="text-2xl font-bold mb-2">Start Your Journey!</h3>
+               <p className="text-blue-100 mb-6">You haven't started any lessons yet.</p>
+               <div>
+                 <Link href="/student/worlds" className="inline-block bg-white text-blue-600 px-6 py-2.5 rounded-lg font-bold hover:bg-slate-50 transition-colors">
+                     Explore Worlds
+                  </Link>
+               </div>
+            </div>
+          )}
+        </div>
+
+        {/* XP Analytics (Span 2) */}
+        <div className="lg:col-span-2 bg-white dark:bg-zinc-900 rounded-2xl p-6 border border-slate-200 dark:border-zinc-800 shadow-sm flex flex-col">
+          <h2 className="text-lg font-bold text-slate-900 dark:text-white mb-4">XP Growth</h2>
+          <div className="flex-1 min-h-[200px] w-full">
+            <ResponsiveContainer width="100%" height="100%">
+              <AreaChart data={xpGrowth} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                <defs>
+                  <linearGradient id="colorXp" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.3}/>
+                    <stop offset="95%" stopColor="#3b82f6" stopOpacity={0}/>
+                  </linearGradient>
+                </defs>
+                <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#94a3b8', fontSize: 12}} dy={10} />
+                <YAxis axisLine={false} tickLine={false} tick={{fill: '#94a3b8', fontSize: 12}} dx={-10} />
+                <Tooltip 
+                  contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)', backgroundColor: '#fff', color: '#0f172a' }}
+                />
+                <Area type="monotone" dataKey="xp" stroke="#3b82f6" strokeWidth={3} fillOpacity={1} fill="url(#colorXp)" />
+              </AreaChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
+        {/* Learning Worlds List (Span 2) */}
+        <div className="lg:col-span-2 bg-white dark:bg-zinc-900 rounded-2xl p-6 border border-slate-200 dark:border-zinc-800 shadow-sm">
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="text-lg font-bold text-slate-900 dark:text-white">Learning Worlds</h2>
+            <Link href="/student/worlds" className="text-sm font-medium text-blue-600 hover:text-blue-700">View All</Link>
+          </div>
+          <div className="space-y-4">
+            {worldsProgress.map((world: any) => (
+              <div key={world.id} className="p-4 border border-slate-100 dark:border-zinc-800 rounded-xl hover:bg-slate-50 dark:hover:bg-zinc-800/50 transition-colors">
+                 <div className="flex justify-between items-center mb-2">
+                   <span className="font-semibold text-slate-900 dark:text-white">{world.title}</span>
+                   <span className="text-xs font-medium text-slate-500 bg-slate-100 dark:bg-zinc-800 px-2 py-1 rounded">
+                     {world.completedLessons} / {world.totalLessons}
+                   </span>
+                 </div>
+                 <div className="w-full h-2 bg-slate-100 dark:bg-zinc-800 rounded-full overflow-hidden">
+                    <div 
+                      className="h-full bg-blue-500 rounded-full" 
+                      style={{ width: `${world.percentage}%` }} 
+                    />
+                 </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* AI Tutor Widget (Span 1) */}
+        <div className="bg-white dark:bg-zinc-900 rounded-2xl p-6 border border-slate-200 dark:border-zinc-800 shadow-sm flex flex-col justify-between">
+          <div>
+            <div className="flex items-center gap-3 mb-6">
+               <div className="w-12 h-12 rounded-xl bg-pink-100 dark:bg-pink-900/30 flex items-center justify-center text-2xl">🤖</div>
+               <h2 className="text-lg font-bold text-slate-900 dark:text-white">AI Tutor</h2>
+            </div>
+            <div className="space-y-4 mb-6">
+               <div>
+                  <p className="text-sm text-slate-500 dark:text-zinc-400">Conversations</p>
+                  <p className="text-2xl font-bold text-slate-900 dark:text-white">{aiStats.totalConversations}</p>
+               </div>
+               <div>
+                  <p className="text-sm text-slate-500 dark:text-zinc-400">Minutes Practiced</p>
+                  <p className="text-xl font-semibold text-slate-900 dark:text-white">{aiStats.totalMinutes}</p>
+               </div>
+            </div>
+          </div>
+          <Link href="/student/tutor" className="block w-full py-2.5 bg-pink-50 dark:bg-pink-900/20 text-pink-600 dark:text-pink-400 rounded-lg font-bold text-center hover:bg-pink-100 dark:hover:bg-pink-900/40 transition-colors">
+             Chat Now
+          </Link>
+        </div>
+
+        {/* Recommended & Recent Activity (Span 1) */}
+        <div className="space-y-6">
+          {/* Recommended Game */}
+          <div className="bg-gradient-to-br from-orange-400 to-red-500 rounded-2xl p-6 text-white shadow-sm">
+            <p className="text-xs font-bold uppercase tracking-wider mb-2 opacity-80">Recommended</p>
+            <h3 className="text-xl font-bold mb-1">Word Match</h3>
+            <p className="text-sm opacity-90 mb-4">Boost your vocabulary!</p>
+            <Link href="/student/games" className="inline-block bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg text-sm font-bold transition-colors">
+              Play Now
+            </Link>
+          </div>
+          
+          {/* Recent Activity Mini */}
+          <div className="bg-white dark:bg-zinc-900 rounded-2xl p-6 border border-slate-200 dark:border-zinc-800 shadow-sm">
+            <h2 className="text-base font-bold text-slate-900 dark:text-white mb-4">Recent</h2>
+            <div className="space-y-3">
+              {recentActivity.slice(0, 3).map((activity: any) => (
+                 <div key={activity.id} className="flex justify-between items-center">
+                    <div className="truncate pr-4">
+                       <p className="font-medium text-slate-900 dark:text-white text-sm truncate">{activity.title}</p>
                     </div>
-
-                    <Link href={`/student/worlds/${latestProgress.worlds?.id}/lesson/${latestProgress.lessons?.id}`} className="inline-flex items-center gap-2 bg-white text-[#0F2A8A] px-6 py-3 rounded-full font-black hover:bg-white/90 hover:scale-105 transition-all shadow-md">
-                       Resume Lesson
-                       <span className="material-symbols-outlined">arrow_forward</span>
-                    </Link>
-                  </div>
-                </>
-              ) : (
-                <div className="relative z-10 text-center py-6">
-                   <span className="material-symbols-outlined text-[64px] mb-4 text-white/50">explore</span>
-                   <h3 className="text-2xl font-black mb-2">Start Your Journey!</h3>
-                   <p className="text-white/80 font-bold mb-6">You haven't started any lessons yet.</p>
-                   <Link href="/student/worlds" className="inline-flex items-center gap-2 bg-white text-[#0F2A8A] px-6 py-3 rounded-full font-black hover:bg-white/90 hover:scale-105 transition-all shadow-md">
-                       Explore Worlds
-                       <span className="material-symbols-outlined">arrow_forward</span>
-                    </Link>
-                </div>
-              )}
-            </div>
-          </section>
-
-          {/* Progress Analytics (XP Growth) */}
-          <section>
-            <h2 className="text-2xl font-black text-[#0F2A8A] mb-4 flex items-center gap-2">
-              <span className="material-symbols-outlined text-purple-500 text-[28px]">trending_up</span>
-              XP Growth
-            </h2>
-            <div className="bg-white rounded-[32px] p-6 border border-[#0F2A8A]/5 shadow-[0_4px_20px_rgba(15,42,138,0.05)] h-[300px]">
-              <ResponsiveContainer width="100%" height="100%">
-                <AreaChart data={xpGrowth} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                  <defs>
-                    <linearGradient id="colorXp" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#F5B21B" stopOpacity={0.8}/>
-                      <stop offset="95%" stopColor="#F5B21B" stopOpacity={0}/>
-                    </linearGradient>
-                  </defs>
-                  <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#0F2A8A', opacity: 0.5, fontSize: 12, fontWeight: 'bold'}} />
-                  <YAxis axisLine={false} tickLine={false} tick={{fill: '#0F2A8A', opacity: 0.5, fontSize: 12, fontWeight: 'bold'}} />
-                  <Tooltip 
-                    contentStyle={{ borderRadius: '16px', border: 'none', boxShadow: '0 10px 30px rgba(15,42,138,0.1)', fontWeight: 'bold', color: '#0F2A8A' }}
-                    itemStyle={{ color: '#F5B21B', fontWeight: '900' }}
-                  />
-                  <Area type="monotone" dataKey="xp" stroke="#F5B21B" strokeWidth={4} fillOpacity={1} fill="url(#colorXp)" />
-                </AreaChart>
-              </ResponsiveContainer>
-            </div>
-          </section>
-
-          {/* Learning Worlds */}
-          <section>
-            <h2 className="text-2xl font-black text-[#0F2A8A] mb-4 flex items-center gap-2">
-              <span className="material-symbols-outlined text-blue-500 text-[28px]">public</span>
-              Learning Worlds
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {worldsProgress.map((world: any) => (
-                <div key={world.id} className="bg-white rounded-3xl p-5 border border-[#0F2A8A]/5 shadow-sm">
-                   <div className="flex justify-between items-center mb-3">
-                     <span className="font-black text-[#0F2A8A] text-lg">{world.title}</span>
-                     <span className="text-xs font-black text-[#0F2A8A]/50 bg-[#F4F6FF] px-2 py-1 rounded-md">{world.completedLessons} / {world.totalLessons}</span>
-                   </div>
-                   <div className="w-full h-3 bg-[#F4F6FF] rounded-full overflow-hidden shadow-inner">
-                      <div className="h-full bg-blue-500 rounded-full" style={{ width: `${world.percentage}%` }}></div>
-                   </div>
-                </div>
+                    {activity.xp_earned > 0 && (
+                       <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400 shrink-0">+{activity.xp_earned}</span>
+                    )}
+                 </div>
               ))}
             </div>
-          </section>
-
+          </div>
         </div>
 
-        {/* Right Column */}
-        <div className="space-y-8">
-
-          {/* Recommendations */}
-          <section>
-            <h2 className="text-2xl font-black text-[#0F2A8A] mb-4">Recommended</h2>
-            <div className="space-y-4">
-               {/* Game */}
-               <Link href="/student/games" className="block bg-gradient-to-r from-orange-400 to-pink-500 rounded-3xl p-6 text-white shadow-lg hover:scale-105 transition-transform">
-                  <span className="bg-white/20 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider mb-3 inline-block">Game</span>
-                  <h3 className="text-xl font-black mb-1">Word Match Challenge</h3>
-                  <p className="text-white/80 text-sm font-bold">Boost your vocabulary!</p>
-               </Link>
-               {/* Story */}
-               <Link href="/student/stories" className="block bg-gradient-to-r from-indigo-500 to-purple-600 rounded-3xl p-6 text-white shadow-lg hover:scale-105 transition-transform">
-                  <span className="bg-white/20 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider mb-3 inline-block">Story</span>
-                  <h3 className="text-xl font-black mb-1">The Lost Lion</h3>
-                  <p className="text-white/80 text-sm font-bold">Perfect for your level.</p>
-               </Link>
-            </div>
-          </section>
-
-          {/* AI Tutor Widget */}
-          <section>
-             <h2 className="text-2xl font-black text-[#0F2A8A] mb-4 flex items-center gap-2">
-                <span className="material-symbols-outlined text-pink-500 text-[28px]">smart_toy</span>
-                AI Tutor
-             </h2>
-             <div className="bg-white rounded-3xl p-6 border border-[#0F2A8A]/5 shadow-[0_4px_20px_rgba(15,42,138,0.05)]">
-                <div className="flex justify-between items-center mb-6">
-                   <div className="w-16 h-16 rounded-full bg-pink-100 flex items-center justify-center text-3xl shrink-0 border border-pink-200">
-                      🤖
-                   </div>
-                   <div className="text-right">
-                      <p className="text-xs font-black text-[#0F2A8A]/50 uppercase tracking-wider">Conversations</p>
-                      <p className="text-2xl font-black text-[#0F2A8A]">{aiStats.totalConversations}</p>
-                   </div>
-                </div>
-                <div className="space-y-3">
-                   <div className="flex justify-between items-center p-3 bg-[#F4F6FF] rounded-xl">
-                      <span className="font-bold text-[#0F2A8A] text-sm">Minutes Practiced</span>
-                      <span className="font-black text-[#0F2A8A]">{aiStats.totalMinutes}</span>
-                   </div>
-                   <div className="flex justify-between items-center p-3 bg-[#F4F6FF] rounded-xl">
-                      <span className="font-bold text-[#0F2A8A] text-sm">Last Session</span>
-                      <span className="font-black text-[#0F2A8A] text-sm">
-                         {aiStats.lastSession ? new Date(aiStats.lastSession).toLocaleDateString() : 'Never'}
-                      </span>
-                   </div>
-                </div>
-                <Link href="/student/tutor" className="mt-4 block w-full py-3 bg-pink-50 text-pink-600 rounded-xl font-black text-center hover:bg-pink-100 transition-colors border border-pink-200">
-                   Chat Now
-                </Link>
-             </div>
-          </section>
-
-          {/* Recent Activity */}
-          <section>
-             <h2 className="text-2xl font-black text-[#0F2A8A] mb-4">Recent Activity</h2>
-             <div className="bg-white rounded-3xl p-6 border border-[#0F2A8A]/5 shadow-[0_4px_20px_rgba(15,42,138,0.05)] space-y-4">
-                {recentActivity.length > 0 ? recentActivity.map((activity: any) => (
-                   <div key={activity.id} className="flex items-center justify-between border-b border-[#0F2A8A]/5 pb-4 last:border-0 last:pb-0">
-                      <div className="flex items-center gap-3">
-                         <div className="w-10 h-10 rounded-full bg-[#F4F6FF] flex items-center justify-center text-blue-500">
-                            <span className="material-symbols-outlined text-[20px]">
-                               {activity.activity_type.includes('game') ? 'sports_esports' : activity.activity_type.includes('story') ? 'menu_book' : 'task_alt'}
-                            </span>
-                         </div>
-                         <div>
-                            <p className="font-bold text-[#0F2A8A] text-sm">{activity.title}</p>
-                            <p className="text-xs text-[#0F2A8A]/50 font-semibold">{new Date(activity.created_at).toLocaleDateString()}</p>
-                         </div>
-                      </div>
-                      {activity.xp_earned > 0 && (
-                         <div className="text-right">
-                            <span className="font-black text-emerald-500 text-sm">+{activity.xp_earned} XP</span>
-                         </div>
-                      )}
-                   </div>
-                )) : (
-                   <p className="text-center text-sm font-semibold text-[#0F2A8A]/50 py-4">No recent activity yet. Start exploring!</p>
-                )}
-             </div>
-          </section>
-
-        </div>
       </div>
     </div>
   );

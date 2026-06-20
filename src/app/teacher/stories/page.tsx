@@ -3,13 +3,7 @@ import { getContentLibrary } from "../services/teacher-services";
 export default async function TeacherStoriesPage() {
   const { stories } = await getContentLibrary();
 
-  // If DB stories table is empty, provide some dummy data to showcase the design
-  const displayStories = stories.length > 0 ? stories : [
-    { id: '1', title: 'The Lost Lion', level: 2, xp_reward: 30, theme: 'Animals', completion_rate: 85 },
-    { id: '2', title: 'Ocean Friends', level: 1, xp_reward: 20, theme: 'Nature', completion_rate: 92 },
-    { id: '3', title: 'The Magic Treehouse', level: 4, xp_reward: 60, theme: 'Adventure', completion_rate: 45 },
-    { id: '4', title: 'Space Explorers', level: 5, xp_reward: 80, theme: 'Sci-Fi', completion_rate: 20 },
-  ];
+
 
   return (
     <div className="max-w-7xl mx-auto px-5 md:px-8 py-8 space-y-8 pb-32">
@@ -19,7 +13,7 @@ export default async function TeacherStoriesPage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {displayStories.map((story: any) => (
+        {stories.map((story: any) => (
           <div key={story.id} className="bg-white rounded-[24px] overflow-hidden border border-[#0F2A8A]/5 shadow-md flex flex-col">
             <div className="h-32 bg-gradient-to-br from-indigo-400 to-purple-600 flex items-center justify-center text-white relative">
                <span className="material-symbols-outlined text-[48px] opacity-50 absolute">menu_book</span>
@@ -53,6 +47,9 @@ export default async function TeacherStoriesPage() {
             </div>
           </div>
         ))}
+        {stories.length === 0 && (
+          <p className="text-[#0F2A8A]/50 font-bold col-span-4 text-center py-8">No stories found in the database.</p>
+        )}
       </div>
     </div>
   );

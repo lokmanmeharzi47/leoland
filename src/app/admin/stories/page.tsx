@@ -1,5 +1,7 @@
 import { getStories } from "../services/admin-services";
 
+import CreateStoryModal from "./CreateStoryModal";
+
 export default async function StoriesPage() {
   const stories = await getStories();
 
@@ -10,9 +12,7 @@ export default async function StoriesPage() {
           <h2 className="text-3xl font-bold text-slate-900 dark:text-white">Stories Management</h2>
           <p className="text-slate-500 mt-2">Manage interactive reading content, reading levels, and languages.</p>
         </div>
-        <button className="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg font-bold">
-          + Create Story
-        </button>
+        <CreateStoryModal />
       </div>
 
       <div className="bg-white dark:bg-zinc-900 rounded-2xl shadow-sm border border-slate-100 dark:border-zinc-800 overflow-hidden">

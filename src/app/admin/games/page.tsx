@@ -1,5 +1,7 @@
 import { getGames } from "../services/admin-services";
 
+import CreateGameModal from "./CreateGameModal";
+
 export default async function GamesPage() {
   const games = await getGames();
 
@@ -10,9 +12,7 @@ export default async function GamesPage() {
           <h2 className="text-3xl font-bold text-slate-900 dark:text-white">Games Management</h2>
           <p className="text-slate-500 mt-2">Manage educational mini-games, difficulty levels, and XP rewards.</p>
         </div>
-        <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-bold">
-          + Create Game
-        </button>
+        <CreateGameModal />
       </div>
 
       <div className="bg-white dark:bg-zinc-900 rounded-2xl shadow-sm border border-slate-100 dark:border-zinc-800 overflow-hidden">

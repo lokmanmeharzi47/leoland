@@ -18,6 +18,34 @@ export async function getAdminSupabaseClient() {
   );
 }
 
+export async function getAllClassrooms() {
+  const supabase = await getAdminSupabaseClient();
+  const { data } = await supabase
+    .from("classrooms")
+    .select("*, profiles:teacher_id(full_name, username)")
+    .order("created_at", { ascending: false });
+  return data || [];
+}
+
+export async function getAdminUnassignedStudents() {
+  const supabase = await getAdminSupabaseClient();
+  
+  const { data: allStudents } = await supabase
+    .from("profiles")
+    .select("*")
+    .eq("role", "student")
+    .order("full_name");
+
+  if (!allStudents) return [];
+
+  const { data: assignments } = await supabase
+    .from("classroom_students")
+    .select("student_id");
+
+  const assignedStudentIds = new Set(assignments?.map(a => a.student_id) || []);
+  return allStudents.filter(s => !assignedStudentIds.has(s.id));
+}
+
 export async function getDashboardStats() {
   const supabase = await getAdminSupabaseClient();
   
@@ -112,4 +140,18 @@ export async function getAIAnalytics() {
     mostCommonTopics: ["Math", "Grammar", "Vocabulary"], // Placeholder
     satisfactionScore: 4.8 // Placeholder
   };
+}
+
+export async function getWorlds() {
+  const supabase = await getAdminSupabaseClient();
+  const { data, error } = await supabase.from("worlds").select("*").order("order_index", { ascending: true });
+  if (error) console.error("Error fetching worlds:", error.message, error.details);
+  return data || [];
+}
+
+export async function getAssignments() {
+  const supabase = await getAdminSupabaseClient();
+  const { data, error } = await supabase.from("assignments").select("*").order("created_at", { ascending: false });
+  if (error) console.error("Error fetching assignments:", error.message, error.details);
+  return data || [];
 }

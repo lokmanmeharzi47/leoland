@@ -16,10 +16,10 @@ export default function TeacherDashboardClient({ initialStats, roster }: { initi
           <p className="text-[#0F2A8A]/60 font-semibold mt-1">Monitor student learning and engagement.</p>
         </div>
         <div className="flex gap-2">
-          <button className="flex items-center gap-2 bg-[#0F2A8A] text-white px-4 py-2 rounded-full font-black text-sm shadow-[0_4px_0_#0a1d61] hover:translate-y-0.5 hover:shadow-[0_2px_0_#0a1d61] transition-all">
+          <Link href="/teacher/assignments" className="flex items-center gap-2 bg-[#0F2A8A] text-white px-4 py-2 rounded-full font-black text-sm shadow-[0_4px_0_#0a1d61] hover:translate-y-0.5 hover:shadow-[0_2px_0_#0a1d61] transition-all">
             <span className="material-symbols-outlined text-[18px]">add_task</span>
             New Assignment
-          </button>
+          </Link>
         </div>
       </div>
 
@@ -113,22 +113,22 @@ export default function TeacherDashboardClient({ initialStats, roster }: { initi
               Quick Assignments
             </h3>
             <div className="grid grid-cols-2 gap-3">
-              <button className="p-3 bg-blue-50 text-blue-700 rounded-xl font-bold text-sm hover:bg-blue-100 flex flex-col items-center gap-1">
+              <Link href="/teacher/games" className="p-3 bg-blue-50 text-blue-700 rounded-xl font-bold text-sm hover:bg-blue-100 flex flex-col items-center gap-1 transition-colors">
                 <span className="material-symbols-outlined">sports_esports</span>
                 Games
-              </button>
-              <button className="p-3 bg-emerald-50 text-emerald-700 rounded-xl font-bold text-sm hover:bg-emerald-100 flex flex-col items-center gap-1">
+              </Link>
+              <Link href="/teacher/stories" className="p-3 bg-emerald-50 text-emerald-700 rounded-xl font-bold text-sm hover:bg-emerald-100 flex flex-col items-center gap-1 transition-colors">
                 <span className="material-symbols-outlined">menu_book</span>
                 Stories
-              </button>
-              <button className="p-3 bg-purple-50 text-purple-700 rounded-xl font-bold text-sm hover:bg-purple-100 flex flex-col items-center gap-1">
+              </Link>
+              <Link href="/teacher/content" className="p-3 bg-purple-50 text-purple-700 rounded-xl font-bold text-sm hover:bg-purple-100 flex flex-col items-center gap-1 transition-colors">
                 <span className="material-symbols-outlined">assignment</span>
                 Lessons
-              </button>
-              <button className="p-3 bg-pink-50 text-pink-700 rounded-xl font-bold text-sm hover:bg-pink-100 flex flex-col items-center gap-1">
+              </Link>
+              <Link href="/teacher/content" className="p-3 bg-pink-50 text-pink-700 rounded-xl font-bold text-sm hover:bg-pink-100 flex flex-col items-center gap-1 transition-colors">
                 <span className="material-symbols-outlined">public</span>
                 Worlds
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -149,8 +149,8 @@ export default function TeacherDashboardClient({ initialStats, roster }: { initi
                        <span className="font-bold text-[#0F2A8A]">{s.full_name || s.username}</span>
                        <span className="text-xs font-black text-emerald-600 bg-emerald-100 px-2 py-1 rounded-full">Resume Available</span>
                      </div>
-                     <p className="text-xs text-[#0F2A8A]/60 font-semibold mb-1">Last World: Vocabulary Forest</p>
-                     <p className="text-xs text-[#0F2A8A]/60 font-semibold mb-3">Next: Wild Animals (65% Progress)</p>
+                     <p className="text-xs text-[#0F2A8A]/60 font-semibold mb-1">XP: {s.total_xp || 0}</p>
+                     <p className="text-xs text-[#0F2A8A]/60 font-semibold mb-3">Streak: {s.streak || 0} 🔥</p>
                      <Link href={`/teacher/students/${s.id}`} className="block text-center w-full py-2 bg-white text-[#0F2A8A] border border-[#0F2A8A]/20 rounded-xl font-bold text-xs hover:bg-[#0F2A8A]/5">
                         View Progress
                      </Link>

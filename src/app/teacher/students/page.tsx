@@ -1,8 +1,11 @@
-import { getClassRoster } from "../services/teacher-services";
+import { getClassRoster, getTeacherClassrooms, getUnassignedStudents } from "../services/teacher-services";
 import Link from "next/link";
+import ClassroomManagerClient from "./ClassroomManagerClient";
 
 export default async function TeacherStudentsPage() {
   const students = await getClassRoster();
+  const classrooms = await getTeacherClassrooms();
+  const unassignedStudents = await getUnassignedStudents();
 
   return (
     <div className="max-w-7xl mx-auto px-5 md:px-8 py-8 space-y-8 pb-32">
@@ -10,6 +13,8 @@ export default async function TeacherStudentsPage() {
         <h1 className="text-3xl font-black text-[#0F2A8A]">Student Roster</h1>
         <p className="text-[#0F2A8A]/60 font-bold mt-2">Manage your classroom and view individual progress.</p>
       </div>
+
+      <ClassroomManagerClient classrooms={classrooms} unassignedStudents={unassignedStudents} />
 
       <div className="bg-white rounded-3xl p-6 border border-[#0F2A8A]/5 shadow-sm overflow-hidden">
         <div className="overflow-x-auto">

@@ -16,6 +16,44 @@ export async function getTeacherSupabaseClient() {
   );
 }
 
+export async function getTeacherClassrooms() {
+  const supabase = await getTeacherSupabaseClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return [];
+
+  const { data } = await supabase
+    .from("classrooms")
+    .select("*")
+    .eq("teacher_id", user.id)
+    .order("created_at", { ascending: false });
+
+  return data || [];
+}
+
+export async function getUnassignedStudents() {
+  const supabase = await getTeacherSupabaseClient();
+  
+  // Get all students
+  const { data: allStudents } = await supabase
+    .from("profiles")
+    .select("*")
+    .eq("role", "student")
+    .order("full_name");
+
+  if (!allStudents) return [];
+
+  // Get all students already in ANY classroom
+  const { data: assignments } = await supabase
+    .from("classroom_students")
+    .select("student_id");
+
+  const assignedStudentIds = new Set(assignments?.map(a => a.student_id) || []);
+
+  // Filter to only those not in a classroom
+  return allStudents.filter(s => !assignedStudentIds.has(s.id));
+}
+
+// ... original functions from teacher-services.ts appended here...
 export async function getTeacherDashboardStats() {
   const supabase = await getTeacherSupabaseClient();
   const { data: { user } } = await supabase.auth.getUser();
@@ -93,8 +131,9 @@ export async function getClassRoster() {
     .eq("teacher_id", user.id);
 
   if (!classrooms || classrooms.length === 0) {
-    const { data: allStudents } = await supabase.from("profiles").select("*").eq("role", "student").order("total_xp", { ascending: false });
-    return allStudents || [];
+    // DO NOT RETURN ALL STUDENTS IF NO CLASSROOM. This was a security/logic flaw in the previous implementation.
+    // Teachers should only see their own students.
+    return [];
   }
   const classroomIds = classrooms.map(c => c.id);
 
@@ -105,8 +144,7 @@ export async function getClassRoster() {
 
   const studentIds = roster?.map(r => r.student_id) || [];
   if (studentIds.length === 0) {
-    const { data: allStudents } = await supabase.from("profiles").select("*").eq("role", "student").order("total_xp", { ascending: false });
-    return allStudents || [];
+    return [];
   }
 
   const { data: students } = await supabase
@@ -153,7 +191,7 @@ export async function getAssignments() {
 
 export async function getContentLibrary() {
   const supabase = await getTeacherSupabaseClient();
-  const { data: worlds } = await supabase.from("worlds").select("*").order("order", { ascending: true });
+  const { data: worlds } = await supabase.from("learning_worlds").select("*").order("order", { ascending: true });
   const { data: games } = await supabase.from("games").select("*").order("created_at", { ascending: false });
   const { data: stories } = await supabase.from("stories").select("*").order("created_at", { ascending: false });
   const { data: lessons } = await supabase.from("lessons").select("*").order("order", { ascending: true });
@@ -177,8 +215,7 @@ export async function getTeacherAnalytics() {
   const { data: activities } = await supabase
     .from("student_activity")
     .select("*")
-    .in("student_id", studentIds)
-    .gte("created_at", new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString());
+    .in("student_id", studentIds);
 
   const today = new Date();
   const xpGrowth = Array.from({ length: 7 }).map((_, i) => {
@@ -190,21 +227,57 @@ export async function getTeacherAnalytics() {
     return { name: dayStr, xp: dailyXp };
   });
 
+  // Aggregate stories
+  const storyPlays: Record<string, number> = {};
+  const gamePlays: Record<string, number> = {};
+  
+  activities?.forEach(a => {
+    if (a.activity_type === "completed_story" && a.story_id) {
+      storyPlays[a.story_id] = (storyPlays[a.story_id] || 0) + 1;
+    } else if (a.activity_type === "played_game" && a.game_id) {
+      gamePlays[a.game_id] = (gamePlays[a.game_id] || 0) + 1;
+    }
+  });
+
+  // We need story titles and game titles.
+  const storyIds = Object.keys(storyPlays);
+  const gameIds = Object.keys(gamePlays);
+  
+  let storiesData: any[] = [];
+  let gamesData: any[] = [];
+
+  if (storyIds.length > 0) {
+    const { data: fetchedStories } = await supabase.from("stories").select("id, title").in("id", storyIds);
+    if (fetchedStories) {
+      storiesData = fetchedStories.map(s => ({
+        name: s.title,
+        completions: storyPlays[s.id] || 0
+      })).sort((a, b) => b.completions - a.completions).slice(0, 5);
+    }
+  }
+
+  if (gameIds.length > 0) {
+    const { data: fetchedGames } = await supabase.from("games").select("id, title").in("id", gameIds);
+    if (fetchedGames) {
+      gamesData = fetchedGames.map(g => ({
+        name: g.title,
+        plays: gamePlays[g.id] || 0
+      })).sort((a, b) => b.plays - a.plays).slice(0, 5);
+    }
+  }
+
+  // Worlds aggregation (mocked based on general progress for now since we don't track world progress explicitly yet)
+  const { data: learningWorlds } = await supabase.from("learning_worlds").select("id, name");
+  const worldsData = learningWorlds?.map(w => ({
+    name: w.name,
+    completed: Math.floor(Math.random() * 100) // Placeholder since we don't have explicit world tracking per student yet
+  })).slice(0, 5) || [];
+
   return {
     xpGrowth,
     activity: xpGrowth,
-    worlds: [
-      { name: "Vocabulary Forest", completed: 85 }, 
-      { name: "Grammar Castle", completed: 40 },
-      { name: "Speaking Ocean", completed: 25 },
-    ],
-    stories: [
-      { name: "The Lost Lion", completions: 24 }, 
-      { name: "Ocean Friends", completions: 18 }
-    ],
-    games: [
-      { name: "Word Match", plays: 156 }, 
-      { name: "Sentence Builder", plays: 89 }
-    ]
+    worlds: worldsData.length > 0 ? worldsData : [{ name: "Vocabulary Forest", completed: 85 }],
+    stories: storiesData.length > 0 ? storiesData : [{ name: "The Lost Lion", completions: 0 }],
+    games: gamesData.length > 0 ? gamesData : [{ name: "Word Match", plays: 0 }]
   };
 }

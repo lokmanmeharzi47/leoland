@@ -1,7 +1,11 @@
-import { getStudents } from "../services/admin-services";
+import { getStudents, getAllClassrooms, getAdminUnassignedStudents, getTeachers } from "../services/admin-services";
+import AdminClassroomClient from "./AdminClassroomClient";
 
 export default async function StudentsPage() {
   const students = await getStudents();
+  const classrooms = await getAllClassrooms();
+  const unassignedStudents = await getAdminUnassignedStudents();
+  const teachers = await getTeachers();
 
   return (
     <div className="max-w-7xl mx-auto space-y-8">
@@ -11,6 +15,12 @@ export default async function StudentsPage() {
           <p className="text-slate-500 mt-2">Manage student progress, assignments, and accounts.</p>
         </div>
       </div>
+
+      <AdminClassroomClient 
+        classrooms={classrooms} 
+        unassignedStudents={unassignedStudents} 
+        teachers={teachers} 
+      />
 
       <div className="bg-white dark:bg-zinc-900 rounded-2xl shadow-sm border border-slate-100 dark:border-zinc-800 overflow-hidden">
         <table className="w-full text-left">

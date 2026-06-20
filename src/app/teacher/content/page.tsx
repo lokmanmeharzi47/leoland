@@ -14,16 +14,16 @@ export default async function TeacherContentPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {worlds.map((world: any) => {
           const worldLessons = lessons.filter((l: any) => l.world_id === world.id);
-          // Dummy data for completion and active students since we don't have a complex join for this aggregate yet
-          const avgCompletion = Math.floor(Math.random() * 40) + 40; 
-          const activeStudents = Math.floor(Math.random() * 15) + 5;
+          // Since we don't have a complex join for this aggregate yet, we default to 0
+          const avgCompletion = 0; 
+          const activeStudents = 0;
 
           return (
             <div key={world.id} className="bg-white rounded-[24px] p-6 border border-[#0F2A8A]/5 shadow-md flex flex-col h-full">
                <div className="w-16 h-16 rounded-2xl bg-blue-50 flex items-center justify-center text-3xl mb-4 border border-blue-100">
                   🌍
                </div>
-               <h2 className="text-xl font-black text-[#0F2A8A] mb-2">{world.title}</h2>
+               <h2 className="text-xl font-black text-[#0F2A8A] mb-2">{world.title || world.name}</h2>
                <p className="text-sm font-bold text-[#0F2A8A]/60 mb-6 flex-1">{world.description}</p>
                
                <div className="space-y-4 mb-6">

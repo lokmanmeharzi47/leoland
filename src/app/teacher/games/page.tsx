@@ -3,13 +3,7 @@ import { getContentLibrary } from "../services/teacher-services";
 export default async function TeacherGamesPage() {
   const { games } = await getContentLibrary();
 
-  // If DB games table is empty, provide some dummy data to showcase the design
-  const displayGames = games.length > 0 ? games : [
-    { id: '1', title: 'Word Match Challenge', difficulty: 2, xp_reward: 50, category: 'Vocabulary', times_played: 156 },
-    { id: '2', title: 'Grammar Ninja', difficulty: 4, xp_reward: 100, category: 'Grammar', times_played: 89 },
-    { id: '3', title: 'Sentence Builder', difficulty: 3, xp_reward: 75, category: 'Writing', times_played: 210 },
-    { id: '4', title: 'Pronunciation Quest', difficulty: 5, xp_reward: 150, category: 'Speaking', times_played: 45 },
-  ];
+
 
   return (
     <div className="max-w-7xl mx-auto px-5 md:px-8 py-8 space-y-8 pb-32">
@@ -19,7 +13,7 @@ export default async function TeacherGamesPage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {displayGames.map((game: any) => (
+        {games.map((game: any) => (
           <div key={game.id} className="bg-white rounded-[24px] p-6 border border-[#0F2A8A]/5 shadow-md flex flex-col">
             <div className="flex justify-between items-start mb-4">
               <span className="bg-orange-100 text-orange-600 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider">
@@ -57,6 +51,9 @@ export default async function TeacherGamesPage() {
             </div>
           </div>
         ))}
+        {games.length === 0 && (
+          <p className="text-[#0F2A8A]/50 font-bold col-span-3 text-center py-8">No games found in the database.</p>
+        )}
       </div>
     </div>
   );
