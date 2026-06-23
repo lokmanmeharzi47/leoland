@@ -11,6 +11,9 @@ type Game = {
   difficulty: string;
   xp_reward: number;
   status: string;
+  cover_url?: string | null;
+  audio_url?: string | null;
+  slug?: string | null;
 };
 
 type Session = {
@@ -53,9 +56,13 @@ export default function GamesClient({ games, sessions }: { games: Game[], sessio
   const GameCard = ({ game }: { game: Game }) => {
     const theme = categoryTheme[game.category] || categoryTheme.Default;
     return (
-      <div className="bg-white dark:bg-zinc-900 rounded-2xl p-5 border border-slate-200 dark:border-zinc-800 shadow-sm flex flex-col shrink-0 w-64 hover:border-blue-200 dark:hover:border-blue-900 transition-colors group cursor-pointer">
-        <div className={`w-full h-32 ${theme.color} rounded-xl flex items-center justify-center text-5xl mb-4`}>
-          {theme.emoji}
+      <Link href={`/student/dashboard/games/${game.id}`} className="bg-white dark:bg-zinc-900 rounded-2xl p-5 border border-slate-200 dark:border-zinc-800 shadow-sm flex flex-col shrink-0 w-64 hover:border-blue-200 dark:hover:border-blue-900 transition-colors group cursor-pointer">
+        <div className={`w-full h-32 ${theme.color} rounded-xl flex items-center justify-center text-5xl mb-4 overflow-hidden relative`}>
+          {game.cover_url ? (
+            <img src={game.cover_url} alt={game.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+          ) : (
+            <div className="group-hover:scale-110 transition-transform">{theme.emoji}</div>
+          )}
         </div>
         <div className="flex justify-between items-start mb-2">
           <h3 className="text-lg font-bold text-slate-900 dark:text-white truncate" title={game.title}>{game.title}</h3>
@@ -68,11 +75,11 @@ export default function GamesClient({ games, sessions }: { games: Game[], sessio
         </div>
         <div className="mt-auto flex items-center justify-between border-t border-slate-100 dark:border-zinc-800 pt-4">
           <span className="font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-500/10 px-2.5 py-1 rounded-md text-xs">+{game.xp_reward} XP</span>
-          <button className="w-8 h-8 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full flex items-center justify-center transition-colors">
+          <div className="w-8 h-8 bg-emerald-500 group-hover:bg-emerald-600 text-white rounded-full flex items-center justify-center transition-colors">
             <span className="material-symbols-outlined text-[18px]">play_arrow</span>
-          </button>
+          </div>
         </div>
-      </div>
+      </Link>
     );
   };
 
@@ -102,9 +109,9 @@ export default function GamesClient({ games, sessions }: { games: Game[], sessio
             </div>
             <h2 className="text-3xl font-bold mb-2">{featuredGame.title}</h2>
             <p className="text-purple-100 mb-6 max-w-md">{featuredGame.description || "Embark on an epic journey through this educational adventure!"}</p>
-            <button className="bg-white text-purple-600 px-6 py-2.5 rounded-lg font-bold hover:bg-slate-50 transition-colors inline-flex items-center gap-2">
+            <Link href={`/student/dashboard/games/${featuredGame.id}`} className="bg-white text-purple-600 px-6 py-2.5 rounded-lg font-bold hover:bg-slate-50 transition-colors inline-flex items-center gap-2">
                <span className="material-symbols-outlined text-xl">play_circle</span> Play Now
-            </button>
+            </Link>
           </div>
           <div className="relative z-10 text-8xl mt-6 md:mt-0">{categoryTheme[featuredGame.category]?.emoji || "🧩"}</div>
         </div>

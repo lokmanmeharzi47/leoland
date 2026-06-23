@@ -27,28 +27,19 @@ export default function LandingPage() {
       <Navbar />
 
       {/* HERO SECTION */}
-      <section className="relative w-full flex flex-col items-center justify-center pt-24 pb-16 px-6 lg:px-8">
+      <section className="relative w-full flex flex-col items-center justify-center pb-16">
         
-        {/* PC Browser Mockup Background */}
-        <div className="w-full max-w-7xl mx-auto relative z-0 mb-8 rounded-[20px] overflow-hidden shadow-2xl border border-[#E5E7EB] bg-white ring-8 ring-white/50">
-          {/* Browser Header */}
-          <div className="bg-[#F3F4F6] h-8 md:h-10 w-full flex items-center px-4 gap-2 border-b border-[#E5E7EB]">
-            <div className="w-3 h-3 rounded-full bg-[#F87171]"></div>
-            <div className="w-3 h-3 rounded-full bg-[#FBBF24]"></div>
-            <div className="w-3 h-3 rounded-full bg-[#34D399]"></div>
-            <div className="ml-4 flex-1 hidden sm:block max-w-[200px] h-5 bg-white rounded-md border border-[#E5E7EB]"></div>
-          </div>
-        {/* Browser Content */}
-          <div className="relative w-full bg-[#FAF8FF] h-[50vh] lg:h-[70vh] overflow-hidden">
-            <img src="/hero_bg.png" alt="LeoLand Magical World" className="w-full h-full object-cover object-top border-b border-[#E5E7EB]" />
-          </div>
+        {/* Full Width Background Image */}
+        <div className="w-full relative z-0 h-[60vh] lg:h-[80vh] overflow-hidden">
+          <img src="/hero_bg.png" alt="LeoLand Magical World" className="w-full h-full object-cover object-top" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#FAF8FF]"></div>
         </div>
 
         {/* Floating Elements */}
-        <motion.img animate={floatAnimation} src="https://cdn-icons-png.flaticon.com/512/3063/3063822.png" className="absolute top-32 left-10 w-24 opacity-80 z-10 drop-shadow-2xl hidden lg:block" alt="Cloud" />
-        <motion.img animate={{ y: [0, -30, 0], transition: { duration: 5, repeat: Infinity, ease: "easeInOut" as const } }} src="https://cdn-icons-png.flaticon.com/512/2854/2854341.png" className="absolute top-40 right-10 w-32 opacity-90 z-10 drop-shadow-2xl hidden lg:block" alt="Hot Air Balloon" />
+        <motion.img animate={floatAnimation} src="https://cdn-icons-png.flaticon.com/512/3063/3063822.png" className="absolute top-24 left-10 w-24 opacity-80 z-10 drop-shadow-2xl hidden lg:block" alt="Cloud" />
+        <motion.img animate={{ y: [0, -30, 0], transition: { duration: 5, repeat: Infinity, ease: "easeInOut" as const } }} src="https://cdn-icons-png.flaticon.com/512/2854/2854341.png" className="absolute top-32 right-10 w-32 opacity-90 z-10 drop-shadow-2xl hidden lg:block" alt="Hot Air Balloon" />
 
-        <div className="relative z-20 max-w-4xl mx-auto w-full mt-[-4rem]">
+        <div className="relative z-20 max-w-4xl mx-auto w-full px-6 mt-[-15vh]">
           <motion.div initial="hidden" animate="visible" variants={fadeInUp} className="bg-white/95 backdrop-blur-xl p-8 md:p-12 rounded-[40px] border-4 border-white shadow-2xl flex flex-col items-center text-center">
             <div className="inline-flex items-center gap-2 bg-[#F5B21B]/20 text-[#d97706] px-4 py-2 rounded-full font-bold text-sm mb-4 md:mb-6 uppercase tracking-wider">
               <span className="material-symbols-outlined text-[18px]">auto_awesome</span>

@@ -10,6 +10,9 @@ type Story = {
   level: string | null;
   language: string | null;
   published: boolean | null;
+  cover_url?: string | null;
+  audio_url?: string | null;
+  slug?: string | null;
 };
 
 type Activity = {
@@ -39,12 +42,18 @@ export default function StoriesClient({ stories, activity }: { stories: Story[],
   const recommendedStories = unreadStories.slice(3, 8);
 
   const BookCard = ({ b, hasRead }: { b: Story, hasRead: boolean }) => (
-    <div className="bg-white dark:bg-zinc-900 rounded-2xl p-5 border border-slate-200 dark:border-zinc-800 shadow-sm flex flex-col shrink-0 w-64 hover:border-blue-200 dark:hover:border-blue-900 transition-colors group cursor-pointer">
-      <div className={`w-full h-32 bg-blue-50 dark:bg-blue-500/10 text-blue-500 rounded-xl flex items-center justify-center text-5xl mb-4 relative`}>
-        <span className="group-hover:scale-110 transition-transform">📖</span>
-        <span className="absolute top-2 right-2 bg-white/90 dark:bg-black/50 backdrop-blur p-1.5 rounded-lg text-slate-800 dark:text-slate-200 shadow-sm flex items-center justify-center">
-          <span className="material-symbols-outlined text-[14px]">volume_up</span>
-        </span>
+    <Link href={`/student/dashboard/stories/${b.id}`} className="bg-white dark:bg-zinc-900 rounded-2xl p-5 border border-slate-200 dark:border-zinc-800 shadow-sm flex flex-col shrink-0 w-64 hover:border-blue-200 dark:hover:border-blue-900 transition-colors group cursor-pointer" dir={b.language === 'ar' ? 'rtl' : 'ltr'}>
+      <div className={`w-full h-32 bg-blue-50 dark:bg-blue-500/10 text-blue-500 rounded-xl flex items-center justify-center text-5xl mb-4 relative overflow-hidden`}>
+        {b.cover_url ? (
+          <img src={b.cover_url} alt={b.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+        ) : (
+          <span className="group-hover:scale-110 transition-transform">📖</span>
+        )}
+        {b.audio_url && (
+          <span className={`absolute top-2 ${b.language === 'ar' ? 'left-2' : 'right-2'} bg-white/90 dark:bg-black/50 backdrop-blur p-1.5 rounded-lg text-slate-800 dark:text-slate-200 shadow-sm flex items-center justify-center`}>
+            <span className="material-symbols-outlined text-[14px]">volume_up</span>
+          </span>
+        )}
       </div>
       <div className="flex justify-between items-start mb-2">
         <h3 className="text-lg font-bold text-slate-900 dark:text-white leading-tight line-clamp-2" title={b.title}>{b.title}</h3>
@@ -67,11 +76,11 @@ export default function StoriesClient({ stories, activity }: { stories: Story[],
           </div>
         </div>
       ) : (
-        <button className="w-full mt-2 py-2 bg-slate-100 dark:bg-zinc-800 hover:bg-slate-200 dark:hover:bg-zinc-700 text-slate-900 dark:text-white rounded-lg font-bold text-sm transition-colors">
+        <div className="w-full mt-2 py-2 bg-slate-100 dark:bg-zinc-800 group-hover:bg-slate-200 dark:group-hover:bg-zinc-700 text-slate-900 dark:text-white rounded-lg font-bold text-sm transition-colors text-center">
           Read Now
-        </button>
+        </div>
       )}
-    </div>
+    </Link>
   );
 
   return (
@@ -96,9 +105,13 @@ export default function StoriesClient({ stories, activity }: { stories: Story[],
 
       {/* Story of the Day Banner */}
       {stories.length > 0 && (
-        <div className="bg-amber-50 dark:bg-amber-900/10 border border-amber-200 dark:border-amber-900/50 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center gap-6 shadow-sm">
-          <div className="w-24 h-24 bg-amber-400 text-white rounded-2xl flex items-center justify-center text-5xl shrink-0 shadow-inner">
-            🌟
+        <div className="bg-amber-50 dark:bg-amber-900/10 border border-amber-200 dark:border-amber-900/50 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center gap-6 shadow-sm" dir={stories[0].language === 'ar' ? 'rtl' : 'ltr'}>
+          <div className="w-24 h-24 bg-amber-400 text-white rounded-2xl flex items-center justify-center text-5xl shrink-0 shadow-inner overflow-hidden relative">
+            {stories[0].cover_url ? (
+              <img src={stories[0].cover_url} alt={stories[0].title} className="w-full h-full object-cover" />
+            ) : (
+              "🌟"
+            )}
           </div>
           <div className="flex-1">
             <div className="flex items-center gap-2 mb-2">
@@ -107,9 +120,9 @@ export default function StoriesClient({ stories, activity }: { stories: Story[],
             </div>
             <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">{stories[0].title}</h2>
             <p className="text-slate-600 dark:text-zinc-300 mb-4 line-clamp-2">{stories[0].content || "A beautiful tale about hoping, dreaming, and the magic of friendship."}</p>
-            <button className="bg-amber-500 hover:bg-amber-600 text-white px-6 py-2 rounded-lg font-bold transition-colors">
+            <Link href={`/student/dashboard/stories/${stories[0].id}`} className="inline-block bg-amber-500 hover:bg-amber-600 text-white px-6 py-2 rounded-lg font-bold transition-colors">
               Read Now
-            </button>
+            </Link>
           </div>
         </div>
       )}
