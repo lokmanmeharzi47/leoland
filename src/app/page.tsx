@@ -27,19 +27,19 @@ export default function LandingPage() {
       <Navbar />
 
       {/* HERO SECTION */}
-      <section className="relative w-full flex flex-col items-center justify-center pb-16">
+      <section className="relative w-full flex flex-col items-center">
         
         {/* Full Width Background Image */}
-        <div className="w-full relative z-0 h-[60vh] lg:h-[80vh] overflow-hidden">
-          <img src="/hero_bg.png" alt="LeoLand Magical World" className="w-full h-full object-cover object-top" />
+        <div className="w-full relative z-0">
+          <img src="/hero_bg.png" alt="LeoLand Magical World" className="w-full h-auto" />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#FAF8FF]"></div>
+          
+          {/* Floating Elements */}
+          <motion.img animate={floatAnimation} src="https://cdn-icons-png.flaticon.com/512/3063/3063822.png" className="absolute top-32 left-10 w-24 opacity-80 z-10 drop-shadow-2xl hidden lg:block" alt="Cloud" />
+          <motion.img animate={{ y: [0, -30, 0], transition: { duration: 5, repeat: Infinity, ease: "easeInOut" as const } }} src="https://cdn-icons-png.flaticon.com/512/2854/2854341.png" className="absolute top-40 right-10 w-32 opacity-90 z-10 drop-shadow-2xl hidden lg:block" alt="Hot Air Balloon" />
         </div>
 
-        {/* Floating Elements */}
-        <motion.img animate={floatAnimation} src="https://cdn-icons-png.flaticon.com/512/3063/3063822.png" className="absolute top-24 left-10 w-24 opacity-80 z-10 drop-shadow-2xl hidden lg:block" alt="Cloud" />
-        <motion.img animate={{ y: [0, -30, 0], transition: { duration: 5, repeat: Infinity, ease: "easeInOut" as const } }} src="https://cdn-icons-png.flaticon.com/512/2854/2854341.png" className="absolute top-32 right-10 w-32 opacity-90 z-10 drop-shadow-2xl hidden lg:block" alt="Hot Air Balloon" />
-
-        <div className="relative z-20 max-w-4xl mx-auto w-full px-6 mt-[-15vh]">
+        <div className="relative z-20 max-w-4xl mx-auto w-full px-6 -mt-16 md:-mt-32 pb-24">
           <motion.div initial="hidden" animate="visible" variants={fadeInUp} className="bg-white/95 backdrop-blur-xl p-8 md:p-12 rounded-[40px] border-4 border-white shadow-2xl flex flex-col items-center text-center">
             <div className="inline-flex items-center gap-2 bg-[#F5B21B]/20 text-[#d97706] px-4 py-2 rounded-full font-bold text-sm mb-4 md:mb-6 uppercase tracking-wider">
               <span className="material-symbols-outlined text-[18px]">auto_awesome</span>

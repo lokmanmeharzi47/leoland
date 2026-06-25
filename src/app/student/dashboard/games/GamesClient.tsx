@@ -46,7 +46,7 @@ export default function GamesClient({ games, sessions }: { games: Game[], sessio
 
   const categories = [
     { name: "Alphabet", emoji: "🔤", color: "text-blue-500 bg-blue-50 dark:bg-blue-500/10 border-blue-100 dark:border-blue-500/20" },
-    { name: "Numbers", emoji: "🔢", color: "text-green-500 bg-green-50 dark:bg-green-500/10 border-green-100 dark:border-green-500/20" },
+    { name: "Vocabulary", emoji: "✨", color: "text-purple-500 bg-purple-50 dark:bg-purple-500/10 border-purple-100 dark:border-purple-500/20" },
     { name: "Languages", emoji: "🌍", color: "text-purple-500 bg-purple-50 dark:bg-purple-500/10 border-purple-100 dark:border-purple-500/20" },
     { name: "Puzzle", emoji: "🧩", color: "text-orange-500 bg-orange-50 dark:bg-orange-500/10 border-orange-100 dark:border-orange-500/20" },
     { name: "Creativity", emoji: "🎨", color: "text-pink-500 bg-pink-50 dark:bg-pink-500/10 border-pink-100 dark:border-pink-500/20" },
@@ -148,7 +148,7 @@ export default function GamesClient({ games, sessions }: { games: Game[], sessio
             <h2 className="text-xl font-bold text-slate-900 dark:text-white">Start Playing</h2>
           </div>
           <div className="flex gap-6 overflow-x-auto pb-4 -mx-2 px-2 scrollbar-hide snap-x">
-            {games.slice(0, 5).map(game => <GameCard key={game.id} game={game} />)}
+            {games.slice(0, 8).map(game => <GameCard key={game.id} game={game} />)}
           </div>
         </section>
       )}

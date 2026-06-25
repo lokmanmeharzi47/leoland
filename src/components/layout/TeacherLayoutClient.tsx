@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import { signOut } from "@/app/actions/auth";
 
 const sidebarLinks = [
   { name: "Dashboard", href: "/teacher/dashboard", icon: "dashboard" },
@@ -56,10 +57,12 @@ export default function TeacherLayoutClient({ children }: { children: React.Reac
         </nav>
 
         <div className="p-4 mt-auto border-t border-[#0F2A8A]/5">
-           <Link href="/" className="flex items-center gap-3 px-4 py-3 rounded-2xl font-bold text-red-500 hover:bg-red-50 transition-colors">
-              <span className="material-symbols-outlined">logout</span>
-              Sign Out
-           </Link>
+           <form action={signOut}>
+             <button type="submit" className="w-full flex items-center gap-3 px-4 py-3 rounded-2xl font-bold text-red-500 hover:bg-red-50 transition-colors">
+                <span className="material-symbols-outlined">logout</span>
+                Sign Out
+             </button>
+           </form>
         </div>
       </aside>
 
